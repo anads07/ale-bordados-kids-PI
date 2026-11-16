@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;600;700&display=swap');
+@import 'tailwindcss';
+
+@import './base.css';
+@import './components/badges.css';
+@import './components/buttons.css';
+@import './components/forms.css';
+@import './components/modal.css';
+@import './components/product-image.css';
+@import './user/components/product-card.css';
+@import './user/components/cart-drawer.css';
+@import './user/components/flash.css';
+@import './user/parts/header.css';
+@import './user/parts/footer.css';
+@import './user/views/home.css';
+@import './user/views/auth.css';
+@import './user/views/favorites.css';
+@import './user/views/sobre.css';
+@import './user/views/product.css';
+@import './user/views/checkout.css';
+@import './user/views/profile.css';
+@import './admin/layout.css';
+@import './admin/components/chart.css';
+@import './admin/components/calendar.css';
+@import './admin/views/dashboard.css';
+@import './admin/views/orders.css';
+@import './admin/views/products.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+@source '../js/**/*.js';
+
+@theme {
+    --font-sans: 'Nunito', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+}
+
+:root {
+    --cor-rosa: #d9779d;
+    --cor-rosa-botao: #ab5e7c;
+    --cor-rosa-escuro: #b5446f;
+    --cor-rosa-claro: #fbeff3;
+
+    --cor-fundo: #ffffff;
+    --cor-fundo-secundario: #f8f6f6;
+    --cor-texto: #2a2629;
+    --cor-texto-suave: #756d72;
+    --cor-borda: #ece7e9;
+    --cor-borda-forte: #bdb5b9;
+    --cor-borda-suave: #d8d1d4;
+    --cor-borda-rosa: #f0c6d5;
+    --cor-borda-erro: #efc7c3;
+    --cor-borda-sucesso: #cce7d5;
+    --cor-borda-aviso: #f0cfca;
+    --cor-borda-admin-forte: #cfc8cb;
+    --cor-borda-admin-suave: #ddd6d9;
+
+    --cor-erro: #b3261e;
+    --cor-erro-fundo: #fdeceb;
+    --cor-erro-escuro: #8f1d17;
+    --cor-placeholder: #b6aeb2;
+    --cor-fundo-status-novo: #fde8ef;
+    --cor-texto-status-novo: #a93863;
+    --cor-fundo-status-orcamento: #fff4d9;
+    --cor-texto-status-orcamento: #9a6a00;
+    --cor-fundo-status-finalizado: #e8f8ef;
+    --cor-texto-status-finalizado: #1e5a2e;
+    --cor-fundo-status-producao: #fff0e3;
+    --cor-texto-status-producao: #a65a1c;
+    --cor-sucesso-fundo: #e8f8ef;
+    --cor-sucesso-texto: #237a4b;
+    --cor-aviso-fundo: #fff3da;
+    --cor-aviso-texto: #8a5a00;
+    --cor-checkout-sucesso-fundo: #ddf0e0;
+    --cor-checkout-sucesso-texto: #1e5a2e;
+    --cor-calendario-inativo: #aaa1a5;
+
+    --cor-fundo-admin: #f1eef0;
+
+    --cor-cabecalho-translucido: rgba(255, 255, 255, 0.96);
+    --cor-favorito-translucido: rgba(255, 255, 255, 0.92);
+    --cor-overlay-modal: rgba(24, 18, 21, 0.35);
+    --cor-overlay-modal-intenso: rgba(24, 18, 21, 0.62);
+    --cor-overlay-carrinho: rgba(24, 18, 21, 0.54);
+    --cor-overlay-checkout: rgba(42, 38, 41, 0.35);
+    --cor-overlay-sutil: rgba(42, 38, 41, 0.035);
+
+    --sombra-card-sutil: rgba(42, 38, 41, 0.035);
+    --sombra-sutil: rgba(42, 38, 41, 0.05);
+    --sombra-card: rgba(42, 38, 41, 0.08);
+    --sombra-interface: rgba(42, 38, 41, 0.1);
+    --sombra-elevada: rgba(42, 38, 41, 0.12);
+    --sombra-carrinho: rgba(42, 38, 41, 0.16);
+    --sombra-botao-rosa: rgba(181, 68, 111, 0.18);
+    --sombra-foco-rosa: rgba(171, 94, 124, 0.18);
+    --sombra-foco-campo: rgba(217, 119, 157, 0.14);
+    --sombra-perfil: rgba(181, 68, 111, 0.2);
+    --sombra-modal: rgba(24, 18, 21, 0.28);
+    --sombra-confirmacao: rgba(20, 16, 18, 0.28);
+    --sombra-modal-pedido: rgba(20, 16, 18, 0.3);
+
+    --fonte-corpo: 'Nunito', ui-sans-serif, system-ui, sans-serif;
+    --fonte-cursiva: 'Great Vibes', cursive;
+    --fonte-redonda: 'Nunito', sans-serif;
+}

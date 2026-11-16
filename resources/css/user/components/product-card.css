@@ -1,0 +1,183 @@
+/* Grade e cartões de produtos, incluindo o botão de favorito. */
+
+@layer components {
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .product-card {
+        overflow: hidden;
+        border: 1px solid var(--cor-borda);
+        border-radius: 18px;
+        background-color: var(--cor-fundo);
+        transition: transform 0.22s ease, box-shadow 0.22s ease,
+            background-color 0.22s ease, border-color 0.22s ease;
+    }
+
+    .product-card:hover {
+        border-color: var(--cor-rosa);
+        background-color: var(--cor-rosa-claro);
+        transform: translateY(-3px);
+        box-shadow: 0 14px 30px var(--sombra-card);
+    }
+
+    .product-card__media {
+        position: relative;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        background-color: var(--cor-fundo-secundario);
+    }
+
+    .product-card__media-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .product-card__media img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-card__media img {
+        transform: scale(1.03);
+    }
+
+    .favorite-form {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2;
+        margin: 0;
+    }
+
+    .favorite-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border: 0;
+        border-radius: 50%;
+        background-color: var(--cor-favorito-translucido);
+        color: var(--cor-rosa-botao);
+        box-shadow: 0 4px 12px var(--sombra-elevada);
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .favorite-button:hover {
+        transform: scale(1.05);
+    }
+
+    .favorite-button svg {
+        width: 17px;
+        height: 17px;
+        fill: currentColor;
+    }
+
+    .favorite-button[aria-pressed='true'] {
+        background-color: var(--cor-rosa);
+        color: var(--cor-fundo);
+    }
+
+    .favorite-button:disabled {
+        opacity: 0.65;
+        cursor: wait;
+    }
+
+    .product-card__body {
+        padding: 14px 16px 16px;
+    }
+
+    .product-card__category {
+        margin-bottom: 4px;
+        color: var(--cor-rosa-botao);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .product-card__title {
+        font-size: 1rem;
+        line-height: 1.25;
+    }
+
+    .product-card__title a:hover {
+        color: var(--cor-rosa-escuro);
+    }
+
+    .product-card__description {
+        display: -webkit-box;
+        margin-top: 6px;
+        overflow: hidden;
+        color: var(--cor-texto-suave);
+        font-size: 0.78rem;
+        line-height: 1.45;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .product-card__rating {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 10px;
+    }
+
+    .product-card__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 14px;
+    }
+
+    .product-card__cart {
+        flex: 1 1 auto;
+        min-width: 0;
+        margin: 0;
+    }
+
+    .product-card__footer .btn {
+        min-width: 0;
+        padding-inline: 10px;
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+
+    .product-card__price {
+        flex: 0 0 auto;
+        color: var(--cor-texto);
+        font-size: 1.05rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .product-grid {
+        gap: 12px;
+    }
+
+    .product-card__body {
+        padding: 12px;
+    }
+
+    .product-card__footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

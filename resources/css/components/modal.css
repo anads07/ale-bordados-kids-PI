@@ -1,0 +1,56 @@
+/* Diálogos e avisos para funções ainda indisponíveis. */
+
+@layer components {
+    .coming-soon-dialog {
+        position: fixed;
+        inset: 0;
+        width: min(92vw, 440px);
+        margin: auto;
+        padding: 0;
+        border: 0;
+        border-radius: 18px;
+        background-color: transparent;
+    }
+
+    .coming-soon-dialog::backdrop {
+        background-color: var(--cor-overlay-modal);
+        backdrop-filter: blur(4px);
+    }
+
+    .coming-soon-dialog__content {
+        padding: 30px 28px;
+        border: 1px solid var(--cor-borda);
+        border-radius: 18px;
+        background-color: var(--cor-fundo);
+        box-shadow: 0 28px 70px var(--sombra-confirmacao);
+        text-align: center;
+    }
+
+    .coming-soon-dialog__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 12px;
+        border-radius: 50%;
+        background-color: var(--cor-rosa-claro);
+        color: var(--cor-rosa-botao);
+    }
+
+    .coming-soon-dialog__icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .coming-soon-dialog h2 {
+        margin-bottom: 8px;
+        font-size: 1.15rem;
+    }
+
+    .coming-soon-dialog p {
+        color: var(--cor-texto-suave);
+        font-size: 0.82rem;
+        line-height: 1.6;
+    }
+}

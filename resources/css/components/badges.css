@@ -1,0 +1,90 @@
+/* Rótulos de status e estrelas de avaliação. */
+
+@layer components {
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 10px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    .badge-novo {
+        background-color: var(--cor-fundo-status-novo);
+        color: var(--cor-texto-status-novo);
+    }
+
+    .badge-orcamento {
+        background-color: var(--cor-fundo-status-orcamento);
+        color: var(--cor-texto-status-orcamento);
+    }
+
+    .badge-pagamento {
+        background-color: var(--cor-aviso-fundo);
+        color: var(--cor-aviso-texto);
+    }
+
+    .badge-producao {
+        background-color: var(--cor-fundo-status-producao);
+        color: var(--cor-texto-status-producao);
+    }
+
+    .badge-finalizado {
+        background-color: var(--cor-fundo-status-finalizado);
+        color: var(--cor-texto-status-finalizado);
+    }
+
+    .badge-cancelado {
+        background-color: var(--cor-fundo-admin);
+        color: var(--cor-texto-suave);
+    }
+
+    .stars {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        color: var(--cor-rosa);
+        line-height: 1;
+    }
+
+    .stars svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .star-full,
+    .star-half__fill {
+        fill: currentColor;
+    }
+
+    .star-empty {
+        color: var(--cor-borda);
+    }
+
+    .star-half {
+        position: relative;
+        display: inline-flex;
+        color: var(--cor-borda);
+    }
+
+    .star-half svg {
+        display: block;
+    }
+
+    .star-half__fill {
+        position: absolute;
+        inset: 0;
+        color: var(--cor-rosa);
+        clip-path: inset(0 50% 0 0);
+    }
+
+    .stars-count {
+        margin-left: 6px;
+        color: var(--cor-texto-suave);
+        font-size: 0.72rem;
+    }
+}

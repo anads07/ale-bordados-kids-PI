@@ -1,0 +1,160 @@
+/* Página Sobre Nós com história, introdução e valores da marca. */
+
+@layer components {
+    .about-page {
+        padding: 34px 0 60px;
+        background: linear-gradient(180deg, var(--cor-rosa-claro) 0%, var(--cor-fundo) 34%);
+    }
+
+    .about-intro {
+        max-width: 840px;
+        margin-bottom: 34px;
+        text-align: center;
+    }
+
+    .about-eyebrow {
+        margin-bottom: 8px;
+        color: var(--cor-rosa-botao);
+        font-family: var(--fonte-cursiva);
+        font-size: 1.75rem;
+        line-height: 1;
+    }
+
+    .about-intro h1 {
+        margin-bottom: 14px;
+        font-size: clamp(2rem, 4vw, 2.9rem);
+        line-height: 1.1;
+    }
+
+    .about-intro > p:last-child {
+        color: var(--cor-texto-suave);
+        font-size: 1.02rem;
+        line-height: 1.7;
+    }
+
+    .about-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 28px;
+    }
+
+    .about-media {
+        margin: 0;
+        overflow: hidden;
+        border: 1px solid var(--cor-borda);
+        border-radius: 22px;
+        background-color: var(--cor-fundo-secundario);
+        box-shadow: 0 18px 40px var(--sombra-card);
+    }
+
+    .about-media img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        min-height: 280px;
+        object-fit: cover;
+    }
+
+    .about-media--large {
+        aspect-ratio: 4 / 3;
+    }
+
+    .about-media--small {
+        aspect-ratio: 5 / 4;
+    }
+
+    .about-copy h2 {
+        margin-bottom: 10px;
+        font-size: 1.45rem;
+    }
+
+    .about-copy p {
+        color: var(--cor-texto-suave);
+        font-size: 0.98rem;
+        line-height: 1.7;
+    }
+
+    .about-copy p + p {
+        margin-top: 10px;
+    }
+
+    .about-values {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 44px;
+    }
+
+    .about-value {
+        padding: 24px 20px;
+        border: 1px solid var(--cor-borda);
+        border-radius: 18px;
+        background-color: var(--cor-fundo);
+        box-shadow: 0 12px 28px var(--sombra-sutil);
+        text-align: center;
+        transition: background-color 0.2s ease, border-color 0.2s ease,
+            box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .about-value:hover {
+        border-color: var(--cor-rosa);
+        background-color: var(--cor-rosa-claro);
+        box-shadow: 0 16px 32px var(--sombra-card);
+        transform: translateY(-2px);
+    }
+
+    .about-value__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        margin-bottom: 12px;
+        border-radius: 50%;
+        background-color: var(--cor-rosa-claro);
+        color: var(--cor-rosa-botao);
+    }
+
+    .about-value__icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .about-value h2 {
+        margin-bottom: 6px;
+        font-size: 1.12rem;
+    }
+
+    .about-value p {
+        color: var(--cor-texto-suave);
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 900px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .about-media {
+        aspect-ratio: 16 / 10;
+    }
+
+    .about-values {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .about-page {
+        padding-top: 24px;
+    }
+
+    .about-values {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}

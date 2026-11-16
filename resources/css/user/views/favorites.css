@@ -1,0 +1,17 @@
+/* Página de favoritos e resumo dos produtos salvos. */
+
+@layer components {
+    .favorites-page {
+        padding: 34px 0 56px;
+    }
+
+    .favorites-summary {
+        margin: -4px 0 18px;
+        color: var(--cor-texto-suave);
+        font-size: 0.82rem;
+    }
+
+    .favorites-empty {
+        margin-top: 8px;
+    }
+}

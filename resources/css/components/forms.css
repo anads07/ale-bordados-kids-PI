@@ -1,0 +1,103 @@
+/* Campos de formulário, busca e filtros de preço. */
+
+@layer components {
+    .campo {
+        width: 100%;
+        height: 42px;
+        padding: 0 14px;
+        border: 1px solid var(--cor-borda);
+        border-radius: 10px;
+        background-color: var(--cor-fundo);
+        color: var(--cor-texto);
+        font-size: 0.85rem;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .campo::placeholder {
+        color: var(--cor-placeholder);
+    }
+
+    .campo:focus {
+        border-color: var(--cor-rosa);
+        box-shadow: 0 0 0 3px var(--sombra-foco-campo);
+        outline: none;
+    }
+
+    .campo-erro {
+        border-color: var(--cor-erro);
+    }
+
+    /* Marca de campo obrigatório e mensagem de validação, reutilizadas em toda a interface. */
+    .required-mark {
+        color: var(--cor-rosa-escuro);
+        font-weight: 700;
+    }
+
+    .field-error {
+        display: block;
+        margin-top: 6px;
+        color: var(--cor-erro);
+        font-size: 0.72rem;
+        font-weight: 600;
+    }
+
+    .search-form {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: min(100%, 320px);
+    }
+
+    .search-form .campo {
+        height: 38px;
+        border-radius: 999px;
+        background-color: var(--cor-fundo-secundario);
+        border-color: transparent;
+        font-size: 0.78rem;
+    }
+
+    .search-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        border: 0;
+        border-radius: 50%;
+        background-color: transparent;
+        color: var(--cor-texto-suave);
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .search-button:hover {
+        background-color: var(--cor-rosa-claro);
+        color: var(--cor-rosa-botao);
+    }
+
+    .search-button svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .price-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .price-grid label {
+        display: grid;
+        gap: 4px;
+        color: var(--cor-texto-suave);
+        font-size: 0.72rem;
+        font-weight: 600;
+    }
+
+    .price-grid .campo {
+        height: 36px;
+        padding-inline: 10px;
+        font-size: 0.78rem;
+    }
+}
