@@ -2,19 +2,46 @@
 
 @layer components {
     .hero {
-        display: flex;
+        position: relative;
+        display: grid;
         align-items: center;
         overflow: hidden;
+        aspect-ratio: 2048 / 768;
         min-height: 360px;
+        background-color: var(--cor-fundo-secundario);
+    }
+
+    .hero__slide {
+        grid-area: 1 / 1;
+        display: flex;
+        align-items: center;
+        min-height: inherit;
         padding-block: 48px;
-        background-color: var(--cor-fundo);
-        background-image: var(--hero-image);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.6s ease, visibility 0s linear 0.6s;
+    }
+
+    .hero__slide.is-active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transition: opacity 0.6s ease;
+    }
+
+    .hero__image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: var(--hero-fit, cover);
+        object-position: var(--hero-posicao, center);
     }
 
     .hero__inner {
+        position: relative;
+        z-index: 1;
         width: 100%;
     }
 
@@ -57,6 +84,80 @@
         margin-top: 18px;
     }
 
+    .hero__arrow {
+        position: absolute;
+        top: 50%;
+        z-index: 2;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        transform: translateY(-50%);
+        border: 1px solid var(--cor-borda);
+        border-radius: 50%;
+        background-color: var(--cor-favorito-translucido);
+        color: var(--cor-texto);
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero__arrow:hover {
+        border-color: var(--cor-rosa-botao);
+        background-color: var(--cor-rosa-claro);
+        color: var(--cor-rosa-botao);
+    }
+
+    .hero__arrow:focus-visible {
+        outline: 2px solid var(--cor-rosa-botao);
+        outline-offset: 2px;
+    }
+
+    .hero__arrow svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .hero__arrow--prev {
+        left: 14px;
+    }
+
+    .hero__arrow--next {
+        right: 14px;
+    }
+
+    .hero__dots {
+        position: absolute;
+        bottom: 18px;
+        left: 50%;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transform: translateX(-50%);
+    }
+
+    .hero__dot {
+        width: 8px;
+        height: 8px;
+        padding: 0;
+        border: 0;
+        border-radius: 999px;
+        background-color: var(--cor-borda-forte);
+        cursor: pointer;
+        transition: width 0.2s ease, background-color 0.2s ease;
+    }
+
+    .hero__dot.is-active {
+        width: 22px;
+        background-color: var(--cor-rosa-botao);
+    }
+
+    .hero__dot:focus-visible {
+        outline: 2px solid var(--cor-rosa-botao);
+        outline-offset: 3px;
+    }
+
     .own-piece {
         position: relative;
         z-index: 1;
@@ -82,35 +183,21 @@
     }
 
     .own-piece__icon {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        display: block;
         width: 118px;
         height: 118px;
-        color: var(--cor-rosa-botao);
-        opacity: 0.86;
+        border: 1px solid var(--cor-borda);
+        border-radius: 18px;
+        background-color: var(--cor-fundo-secundario);
+        object-fit: var(--own-piece-fit, cover);
+        object-position: center;
     }
 
-    .own-piece__icon svg {
-        position: absolute;
-    }
-
-    .own-piece__shirt {
-        width: 100%;
-        height: 100%;
-        /* Traço mais fino e delicado para o ícone da camisa. */
-        stroke-width: 1.3;
-    }
-
-    .own-piece__heart {
-        top: 36%;
-        left: 39%;
-        width: 19%;
-        height: 19%;
-        fill: currentColor;
-        color: var(--cor-rosa-escuro);
-        transform: rotate(-4deg);
+    /* PNG sem fundo: sem caixa, sem borda e sem corte da imagem. */
+    .own-piece__icon--contain {
+        border: 0;
+        border-radius: 0;
+        background-color: transparent;
     }
 
     .own-piece__intro h2 {
@@ -415,6 +502,9 @@
 @media (max-width: 900px) {
     .hero {
         min-height: 320px;
+    }
+
+    .hero__slide {
         padding-block: 44px;
     }
 
@@ -475,8 +565,27 @@
 @media (max-width: 600px) {
     .hero {
         min-height: 380px;
+    }
+
+    .hero__slide {
         padding-block: 30px;
-        background-position: 22% center;
+    }
+
+    .hero__arrow {
+        width: 32px;
+        height: 32px;
+    }
+
+    .hero__arrow--prev {
+        left: 8px;
+    }
+
+    .hero__arrow--next {
+        right: 8px;
+    }
+
+    .hero__dots {
+        bottom: 12px;
     }
 
     .hero__actions .btn {

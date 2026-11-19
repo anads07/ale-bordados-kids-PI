@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProdutoRequest;
 use App\Models\Produto;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
@@ -15,16 +16,37 @@ use Throwable;
 // Gerencia listagem, cadastro, edição e exclusão de produtos.
 class ProdutoController extends Controller
 {
-    // Lista os produtos mais recentes.
-    public function index(): View
+    // Lista os produtos mais recentes, com busca por nome e filtro por categoria.
+    public function index(Request $request): View
     {
-        $produtos = Produto::query()
+        $busca = is_string($request->query('q')) ? trim($request->query('q')) : '';
+        $categoria = is_string($request->query('categoria')) ? trim($request->query('categoria')) : '';
+
+        $consulta = Produto::query();
+
+        if ($busca !== '') {
+            $consulta->where(function ($filtro) use ($busca) {
+                $filtro->where('nome_produto', 'like', "%{$busca}%")
+                    ->orWhere('descricao', 'like', "%{$busca}%");
+            });
+        }
+
+        if ($categoria !== '') {
+            $consulta->where('categoria', $categoria);
+        }
+
+        $produtos = $consulta
             ->orderByDesc('id_pr')
             ->paginate(10)
             ->withQueryString();
 
         return view('admin.products.index', [
             'produtos' => $produtos,
+            'categorias' => $this->categorias(),
+            'filtros' => [
+                'busca' => $busca,
+                'categoria' => $categoria,
+            ],
         ]);
     }
 

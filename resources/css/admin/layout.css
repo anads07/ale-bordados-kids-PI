@@ -24,6 +24,9 @@
 
     .admin-logo {
         font-size: 1.55rem;
+        /* A fonte script deixa um espaço visual à esquerda da primeira letra.
+           Esse ajuste compensa o recuo óptico e alinha a logo ao título/busca. */
+        transform: translateX(-8px);
     }
 
     .admin-nav {

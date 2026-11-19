@@ -7,7 +7,6 @@
     <div class="container-app admin-container admin-products">
         <header class="admin-products__header">
             <div>
-                <p class="admin-products__eyebrow">Catálogo</p>
                 <h1>Gerenciar produtos</h1>
                 <p>Consulte, edite e remova as peças disponíveis na loja.</p>
             </div>
@@ -18,17 +17,63 @@
             </a>
         </header>
 
+        <form class="admin-products__filters" action="{{ route('admin.produtos.index') }}" method="GET">
+            <label class="admin-filter-field">
+                <span>Buscar produto</span>
+                <span class="admin-filter-input">
+                    <x-lucide-search aria-hidden="true" />
+                    <input
+                        type="search"
+                        name="q"
+                        class="campo"
+                        value="{{ $filtros['busca'] }}"
+                        placeholder="Nome ou descrição"
+                    >
+                </span>
+            </label>
+
+            <label class="admin-filter-field">
+                <span>Categoria</span>
+                <select name="categoria" class="campo">
+                    <option value="">Todas as categorias</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria }}" @selected($filtros['categoria'] === $categoria)>
+                            {{ $categoria }}
+                        </option>
+                    @endforeach
+                </select>
+            </label>
+
+            <div class="admin-products__filters-actions">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+
+                @if ($filtros['busca'] !== '' || $filtros['categoria'] !== '')
+                    <a href="{{ route('admin.produtos.index') }}" class="btn btn-outline">Limpar</a>
+                @endif
+            </div>
+        </form>
+
         @if ($produtos->isEmpty())
             <section class="admin-card admin-products__empty">
-                <x-lucide-package-open aria-hidden="true" />
-                <h2>Nenhum produto cadastrado</h2>
-                <p>Cadastre a primeira peça para começar a montar o catálogo da loja.</p>
-                <a href="{{ route('admin.produtos.create') }}" class="btn btn-primary">Cadastrar Novo Produto</a>
+                @if ($filtros['busca'] !== '' || $filtros['categoria'] !== '')
+                    <x-lucide-search aria-hidden="true" />
+                    <h2>Nenhum produto encontrado</h2>
+                    <p>Nenhuma peça corresponde aos filtros selecionados.</p>
+                    <a href="{{ route('admin.produtos.index') }}" class="btn btn-outline">Limpar filtros</a>
+                @else
+                    <x-lucide-package-open aria-hidden="true" />
+                    <h2>Nenhum produto cadastrado</h2>
+                    <p>Cadastre a primeira peça para começar a montar o catálogo da loja.</p>
+                    <a href="{{ route('admin.produtos.create') }}" class="btn btn-primary">Cadastrar Novo Produto</a>
+                @endif
             </section>
         @else
             <section class="admin-card admin-products__card">
                 <div class="admin-products__summary">
-                    <span>{{ $produtos->total() }} produto(s) no catálogo</span>
+                    <span>
+                        {{ $produtos->total() }} produto(s)
+                        {{ $filtros['busca'] !== '' || $filtros['categoria'] !== '' ? 'encontrado(s)' : 'no catálogo' }}
+                    </span>
                     <span>Exibindo {{ $produtos->firstItem() }}–{{ $produtos->lastItem() }}</span>
                 </div>
 

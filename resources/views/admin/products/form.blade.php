@@ -16,7 +16,6 @@
 
         <header class="admin-product-form__heading">
             <div>
-                <p class="admin-products__eyebrow">Catálogo</p>
                 <h1>{{ $editando ? 'Editar produto' : 'Cadastrar produto' }}</h1>
                 <p>{{ $editando ? 'Atualize as informações da peça e salve as alterações.' : 'Preencha os dados da nova peça para adicioná-la à loja.' }}</p>
             </div>

@@ -1,8 +1,5 @@
 <?php
 
-// Centraliza todos os dados mockados/estáticos usados pela interface pública:
-// informações da loja, contatos, formas de pagamento, depoimentos, notas e status.
-
 return [
     'store' => [
         'name' => 'Alê Bordados Kids',
@@ -26,11 +23,58 @@ return [
         'Boleto',
     ],
 
+    'own_piece' => [
+        'imagem' => 'images/body.png',
+        'alt' => 'Peça infantil com bordado personalizado',
+    
+        'ajuste' => 'contain',
+    ],
+
     'hero' => [
         'eyebrow' => 'Bordados personalizados',
         'title' => 'Carinho em cada ponto,',
         'highlight' => 'feito para o seu bebê',
         'description' => 'Enxovais, roupas e toalhas infantis com bordados delicados e personalizados para eternizar os primeiros momentos.',
+    ],
+
+
+    'hero_slides' => [
+        [
+            'imagem' => 'images/hero_banner.png',
+            'alt' => 'Banner de bordado com ursinha Sara Maria',
+            'ajuste' => 'cover',
+            'posicao' => 'center center',
+            'eyebrow' => 'Bordados personalizados',
+            'title' => 'Carinho em cada ponto,',
+            'highlight' => 'feito para o seu bebê',
+            'description' => 'Enxovais, roupas e toalhas infantis com bordados delicados e personalizados para eternizar os primeiros momentos.',
+            'acao' => 'Ver coleção',
+            'link' => '#produtos',
+        ],
+        [
+            'imagem' => 'images/maria_flor.png',
+            'alt' => 'Kit de fraldas bordadas para enxoval',
+            'ajuste' => 'cover',
+            'posicao' => 'center 40%',
+            'eyebrow' => 'Enxoval completo',
+            'title' => 'Tudo prontinho para a chegada,',
+            'highlight' => 'com muito carinho',
+            'description' => 'Kits e conjuntos bordados com acabamento delicado para receber o bebê com todo o amor.',
+            'acao' => 'Conhecer os kits',
+            'link' => '#produtos',
+        ],
+        [
+            'imagem' => 'images/agata.png',
+            'alt' => 'Body infantil com bordado personalizado',
+            'ajuste' => 'cover',
+            'posicao' => 'center 30%',
+            'eyebrow' => 'Peças únicas',
+            'title' => 'O nome do seu bebê,',
+            'highlight' => 'bordado à mão',
+            'description' => 'Escolha a cor, a fonte e o detalhe: cada peça é feita especialmente para contar a sua história.',
+            'acao' => 'Ver personalizações',
+            'link' => '#produtos',
+        ],
     ],
 
     'rating' => [
@@ -91,8 +135,7 @@ return [
         ],
     ],
 
-    // Opções centralizadas de personalização usadas na página do produto,
-    // no carrinho e na validação do checkout.
+
     'personalizacao' => [
         'cores_produto' => [
             'Branco',
@@ -122,10 +165,8 @@ return [
         'cor_padrao' => 'Branco',
     ],
 
-    // Dados de apoio do painel administrativo: navegação, calendário, gráficos,
-    // pendências e contatos de chat estáticos. Os pedidos recentes vêm do banco.
     'admin' => [
-        // Navegação real do catálogo administrativo e seus estados ativos.
+       
         'nav' => [
             [
                 'label' => 'Início',

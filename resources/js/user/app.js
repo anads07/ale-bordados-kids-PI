@@ -2,11 +2,13 @@
 
 import { iniciarCarrinho } from './cart';
 import { iniciarFavoritos } from './favorites';
+import { iniciarCarrosselHero } from './hero';
 import { iniciarDetalheProduto } from './product';
 
 document.addEventListener('DOMContentLoaded', () => {
     iniciarCarrinho();
     iniciarFavoritos();
+    iniciarCarrosselHero();
     iniciarDetalheProduto();
 
     const cabecalho = document.querySelector('[data-site-header]');

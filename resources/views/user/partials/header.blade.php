@@ -2,7 +2,8 @@
 <header class="site-header" data-site-header>
     <div class="container-app header-inner">
         <a href="{{ route('home') }}" class="logo-script" aria-label="Alê Bordados Kids — Início">
-            {{ config('mock.store.name') }}
+        {{ config('mock.store.name') }}
+        <img src="{{ asset('images/logo_costura.png') }}" alt="" class="logo-costura">
         </a>
 
         <form class="search-form" action="{{ route('home') }}" method="GET" role="search">

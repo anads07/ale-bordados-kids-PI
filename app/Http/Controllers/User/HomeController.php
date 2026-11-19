@@ -72,6 +72,8 @@ class HomeController extends Controller
 
         $depoimentos = config('mock.testimonials', []);
         $destaque = config('mock.hero', []);
+        $slidesHero = config('mock.hero_slides', []);
+        $ownPiece = config('mock.own_piece', []);
 
         $filtros = [
             'busca' => $busca,
@@ -83,7 +85,16 @@ class HomeController extends Controller
 
         $idsFavoritos = $favoritos->ids();
 
-        return view('user.home', compact('produtos', 'categorias', 'depoimentos', 'destaque', 'filtros', 'idsFavoritos'));
+        return view('user.home', compact(
+            'produtos',
+            'categorias',
+            'depoimentos',
+            'destaque',
+            'slidesHero',
+            'ownPiece',
+            'filtros',
+            'idsFavoritos'
+        ));
     }
 
     /**

@@ -19,12 +19,24 @@
     }
 
     .logo-script {
-        flex: 0 0 auto;
-        color: var(--cor-rosa-botao);
-        font-family: var(--fonte-cursiva);
-        font-size: 1.7rem;
-        line-height: 1;
-        white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    gap: 6px;
+    color: #222222 !important;
+    font-family: var(--fonte-cursiva);
+    font-size: 1.7rem;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    }
+
+    .logo-costura {
+    display: block;
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    flex-shrink: 0;
     }
 
     .header-nav {
@@ -245,6 +257,11 @@
 @media (max-width: 600px) {
     .header-inner {
         gap: 10px;
+    }
+
+    .logo-costura {
+    width: 40px;
+    height: 40px;
     }
 
     .logo-script {

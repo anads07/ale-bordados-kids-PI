@@ -14,34 +14,102 @@
         ], fn ($valor) => $valor !== null && $valor !== '');
     @endphp
 
-    <section
-        class="hero"
-        aria-label="Destaques da loja"
-        style="--hero-image: url('{{ asset('images/hero_banner.png') }}')"
-    >
-        <div class="container-app hero__inner">
-            <div class="hero__content">
-                <p class="hero__eyebrow">{{ $destaque['eyebrow'] ?? 'Bordados personalizados' }}</p>
-                <h1>
-                    {{ $destaque['title'] ?? 'Carinho em cada ponto,' }}
-                    <span>{{ $destaque['highlight'] ?? 'feito para o seu bebê' }}</span>
-                </h1>
-                <p class="hero__description">
-                    {{ $destaque['description'] ?? 'Enxovais, roupas e toalhas infantis com bordados delicados e personalizados.' }}
-                </p>
-                <div class="hero__actions">
-                    <a href="#produtos" class="btn btn-primary">Ver coleção</a>
+    @php
+        // Se não houver slides configurados, mantém o destaque único de antes.
+        $slidesHero = $slidesHero ?? [];
+
+        if ($slidesHero === []) {
+            $slidesHero[] = [
+                'imagem' => 'images/banner-ursinha-sara-maria.png',
+                'alt' => 'Banner de bordado com ursinha Sara Maria',
+                'ajuste' => 'cover',
+                'posicao' => 'center center',
+                'eyebrow' => $destaque['eyebrow'] ?? 'Bordados personalizados',
+                'title' => $destaque['title'] ?? 'Carinho em cada ponto,',
+                'highlight' => $destaque['highlight'] ?? 'feito para o seu bebê',
+                'description' => $destaque['description'] ?? 'Enxovais, roupas e toalhas infantis com bordados delicados e personalizados.',
+                'acao' => 'Ver coleção',
+                'link' => '#produtos',
+            ];
+        }
+    @endphp
+
+    <section class="hero" aria-label="Destaques da loja" data-hero-carousel>
+        @foreach ($slidesHero as $indice => $slide)
+            <article
+                class="hero__slide {{ $loop->first ? 'is-active' : '' }}"
+                data-hero-slide
+                aria-hidden="{{ $loop->first ? 'false' : 'true' }}"
+                style="--hero-fit: {{ $slide['ajuste'] ?? 'cover' }}; --hero-posicao: {{ $slide['posicao'] ?? 'center' }}"
+                @if (! $loop->first) inert @endif
+            >
+                <img
+                    class="hero__image"
+                    src="{{ asset($slide['imagem'] ?? 'images/hero_banner.png') }}"
+                    alt="{{ $slide['alt'] ?? '' }}"
+                    @if (! $loop->first) loading="lazy" @endif
+                >
+
+                <div class="container-app hero__inner">
+                    <div class="hero__content">
+                        <p class="hero__eyebrow">{{ $slide['eyebrow'] ?? '' }}</p>
+                        <h1>
+                            {{ $slide['title'] ?? '' }}
+                            <span>{{ $slide['highlight'] ?? '' }}</span>
+                        </h1>
+                        <p class="hero__description">{{ $slide['description'] ?? '' }}</p>
+                        <div class="hero__actions">
+                            <a href="{{ $slide['link'] ?? '#produtos' }}" class="btn btn-primary">
+                                {{ $slide['acao'] ?? 'Ver coleção' }}
+                            </a>
+                        </div>
+                    </div>
                 </div>
+            </article>
+        @endforeach
+
+        @if (count($slidesHero) > 1)
+            <button
+                type="button"
+                class="hero__arrow hero__arrow--prev"
+                data-hero-prev
+                aria-label="Banner anterior"
+            >
+                <x-lucide-chevron-left aria-hidden="true" />
+            </button>
+
+            <button
+                type="button"
+                class="hero__arrow hero__arrow--next"
+                data-hero-next
+                aria-label="Próximo banner"
+            >
+                <x-lucide-chevron-right aria-hidden="true" />
+            </button>
+
+            <div class="hero__dots" role="group" aria-label="Escolher banner">
+                @foreach ($slidesHero as $indice => $slide)
+                    <button
+                        type="button"
+                        class="hero__dot {{ $loop->first ? 'is-active' : '' }}"
+                        data-hero-dot="{{ $indice }}"
+                        aria-label="Banner {{ $indice + 1 }}"
+                        aria-current="{{ $loop->first ? 'true' : 'false' }}"
+                    ></button>
+                @endforeach
             </div>
-        </div>
+        @endif
     </section>
 
     <section class="container-app own-piece" aria-labelledby="peca-propria-titulo">
         <div class="own-piece__inner">
-            <span class="own-piece__icon" aria-hidden="true">
-                <x-lucide-shirt class="own-piece__shirt" />
-                <x-lucide-heart class="own-piece__heart" />
-            </span>
+            <img
+                class="own-piece__icon {{ ($ownPiece['ajuste'] ?? 'cover') === 'contain' ? 'own-piece__icon--contain' : '' }}"
+                src="{{ asset($ownPiece['imagem'] ?? 'images/produtos/body.jpeg') }}"
+                alt="{{ $ownPiece['alt'] ?? 'Peça infantil com bordado personalizado' }}"
+                style="--own-piece-fit: {{ $ownPiece['ajuste'] ?? 'cover' }}"
+                loading="lazy"
+            >
 
             <div class="own-piece__intro">
                 <h2 id="peca-propria-titulo">Tem uma peça própria?</h2>

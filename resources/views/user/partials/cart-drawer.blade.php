@@ -24,15 +24,11 @@
                 <strong data-cart-total>{{ $totalCarrinhoFormatado }}</strong>
             </div>
 
-            @if ($itensCarrinho->isNotEmpty())
-                <a href="{{ route('checkout.index') }}" class="btn btn-primary cart-drawer__checkout">
-                    Finalizar compra
-                </a>
-            @else
-                <button type="button" class="btn btn-primary cart-drawer__checkout" disabled>
-                    Finalizar compra
-                </button>
-            @endif
+            {{-- Sempre navega para o checkout: visitantes são levados ao login
+                 e, após autenticar, retornam ao checkout com a sacola preservada. --}}
+            <a href="{{ route('checkout.index') }}" class="btn btn-primary cart-drawer__checkout">
+                Finalizar compra
+            </a>
         </footer>
     </div>
 </dialog>
