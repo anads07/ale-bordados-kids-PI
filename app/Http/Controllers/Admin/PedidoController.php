@@ -71,7 +71,13 @@ class PedidoController extends Controller
     {
         if (is_string($dataInformada) && $dataInformada !== '') {
             try {
-                return Carbon::createFromFormat('Y-m-d', $dataInformada)->startOfDay();
+                if (! Carbon::hasFormat($dataInformada, 'Y-m-d')) {
+                    return today();
+                }
+
+                $data = Carbon::createFromFormat('Y-m-d', $dataInformada)->startOfDay();
+
+                return $data->format('Y-m-d') === $dataInformada ? $data : today();
             } catch (\Throwable) {
                 return today();
             }

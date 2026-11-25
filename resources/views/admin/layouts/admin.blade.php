@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Área administrativa do Alê Bordados Kids.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
 
     <title>@yield('title', 'Painel administrativo | '.config('mock.store.name'))</title>
 
     {{-- Estrutura da área administrativa, separada da vitrine pública. --}}
     @vite(['resources/css/app.css', 'resources/js/admin/app.js'])
 </head>
-<body class="admin-body">
+<body class="admin-body" data-login-url="{{ route('login') }}">
     @php
         $navegacaoAdmin = config('mock.admin.nav', []);
     @endphp

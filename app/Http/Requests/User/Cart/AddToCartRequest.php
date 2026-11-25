@@ -30,10 +30,10 @@ class AddToCartRequest extends FormRequest
 
         return [
             'quantidade' => ['required', 'integer', 'min:1', 'max:'.min($estoque, 99)],
-            'cor_produto' => ['required', 'string', Rule::in($personalizacao['cores_produto'] ?? [])],
+            'cor_produto' => ['required', 'string', 'max:20', Rule::in($personalizacao['cores_produto'] ?? [])],
             'escrita' => ['required', 'string', 'max:40'],
-            'cor_escrita' => ['required', 'string', Rule::in($personalizacao['cores_linha'] ?? [])],
-            'fonte_escrita' => ['required', 'string', Rule::in($personalizacao['fontes'] ?? [])],
+            'cor_escrita' => ['required', 'string', 'max:20', Rule::in($personalizacao['cores_linha'] ?? [])],
+            'fonte_escrita' => ['required', 'string', 'max:40', Rule::in($personalizacao['fontes'] ?? [])],
             'desenho' => ['required', 'string', 'max:30'],
             'observacoes' => ['nullable', 'string', 'max:500'],
             'imagem_inspiracao' => ['nullable', 'file', 'mimes:jpg,jpeg,png,webp', 'max:5120'],

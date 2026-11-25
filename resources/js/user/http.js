@@ -30,7 +30,7 @@ export async function enviarFormulario(formulario) {
     if (!resposta.ok) {
         if (resposta.status === 401) {
             // Leva ao login quando a sessão expirou ou falta autenticação.
-            window.location.assign('/login');
+            window.location.assign(document.body.dataset.loginUrl || '/login');
 
             throw new Error('Redirecionando para o login...');
         }

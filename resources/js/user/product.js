@@ -27,30 +27,59 @@ export function iniciarDetalheProduto() {
     const previa = document.querySelector('[data-product-image-preview]');
     const nomeArquivo = document.querySelector('[data-product-image-name]');
 
+    let urlPrevia = null;
+
+    const limparPrevia = () => {
+        if (urlPrevia) {
+            URL.revokeObjectURL(urlPrevia);
+            urlPrevia = null;
+        }
+
+        if (previa) {
+            previa.removeAttribute('src');
+            previa.hidden = true;
+        }
+
+        if (nomeArquivo) {
+            nomeArquivo.textContent = 'Nenhum arquivo selecionado';
+        }
+    };
+
     // Mostra a imagem escolhida antes do envio do formulário.
     campoImagem?.addEventListener('change', () => {
         const arquivo = campoImagem.files?.[0];
 
         if (!arquivo) {
-            if (previa) {
-                previa.removeAttribute('src');
-                previa.hidden = true;
-            }
-
-            if (nomeArquivo) {
-                nomeArquivo.textContent = 'Nenhum arquivo selecionado';
-            }
-
+            limparPrevia();
             return;
         }
+
+        if (!arquivo.type.startsWith('image/')) {
+            campoImagem.value = '';
+            limparPrevia();
+            return;
+        }
+
+        if (urlPrevia) {
+            URL.revokeObjectURL(urlPrevia);
+        }
+
+        urlPrevia = URL.createObjectURL(arquivo);
 
         if (nomeArquivo) {
             nomeArquivo.textContent = arquivo.name;
         }
 
         if (previa) {
-            previa.src = URL.createObjectURL(arquivo);
+            previa.src = urlPrevia;
             previa.hidden = false;
+        }
+    });
+
+    window.addEventListener('pagehide', () => {
+        if (urlPrevia) {
+            URL.revokeObjectURL(urlPrevia);
+            urlPrevia = null;
         }
     });
 }

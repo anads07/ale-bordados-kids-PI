@@ -93,6 +93,19 @@ class CheckoutController extends Controller
                 }
             }
 
+            foreach ($necessidades as $idProduto => $quantidade) {
+                $atualizado = Produto::query()
+                    ->whereKey($idProduto)
+                    ->where('estoque', '>=', $quantidade)
+                    ->decrement('estoque', $quantidade);
+
+                if ($atualizado === 0) {
+                    throw ValidationException::withMessages([
+                        'carrinho' => 'O estoque de uma das peças foi atualizado. Revise o carrinho.',
+                    ]);
+                }
+            }
+
             $identificadores = [];
 
             foreach ($itens as $item) {
@@ -122,10 +135,6 @@ class CheckoutController extends Controller
                 ]);
 
                 $identificadores[] = (int) $pedido->id_pedido;
-            }
-
-            foreach ($necessidades as $idProduto => $quantidade) {
-                $produtos->get($idProduto)?->decrement('estoque', $quantidade);
             }
 
             return $identificadores;

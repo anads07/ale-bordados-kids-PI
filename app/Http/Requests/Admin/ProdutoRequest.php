@@ -7,10 +7,14 @@ use Illuminate\Foundation\Http\FormRequest;
 // Valida os dados enviados pelo formulário de produtos.
 class ProdutoRequest extends FormRequest
 {
-    // Confirma que somente administradores enviem o formulário.
+    // Confirma que somente o administrador autorizado envie o formulário.
     public function authorize(): bool
     {
-        return (bool) $this->user()?->is_admin;
+        $usuario = $this->user();
+        $emailAdministrativo = (string) config('admin.email');
+
+        return (bool) $usuario?->is_admin
+            && strcasecmp((string) $usuario->email, $emailAdministrativo) === 0;
     }
 
     // Define as regras de cadastro e edição.

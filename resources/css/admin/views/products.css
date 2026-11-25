@@ -10,14 +10,6 @@
         margin-bottom: 20px;
     }
 
-    .admin-products__eyebrow {
-        margin-bottom: 3px;
-        color: var(--cor-rosa-botao);
-        font-family: var(--fonte-cursiva);
-        font-size: 1.35rem;
-        line-height: 1;
-    }
-
     .admin-products__header h1,
     .admin-product-form__heading h1 {
         font-size: clamp(1.55rem, 2.6vw, 2rem);

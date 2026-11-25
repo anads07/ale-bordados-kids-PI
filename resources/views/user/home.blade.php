@@ -14,26 +14,6 @@
         ], fn ($valor) => $valor !== null && $valor !== '');
     @endphp
 
-    @php
-        // Se não houver slides configurados, mantém o destaque único de antes.
-        $slidesHero = $slidesHero ?? [];
-
-        if ($slidesHero === []) {
-            $slidesHero[] = [
-                'imagem' => 'images/pagina_inicial/banner_1.png',
-                'alt' => 'Banner de bordado com ursinha Sara Maria',
-                'ajuste' => 'cover',
-                'posicao' => 'center center',
-                'eyebrow' => $destaque['eyebrow'] ?? 'Bordados personalizados',
-                'title' => $destaque['title'] ?? 'Carinho em cada ponto,',
-                'highlight' => $destaque['highlight'] ?? 'feito para o seu bebê',
-                'description' => $destaque['description'] ?? 'Enxovais, roupas e toalhas infantis com bordados delicados e personalizados.',
-                'acao' => 'Ver coleção',
-                'link' => '#produtos',
-            ];
-        }
-    @endphp
-
     <section class="hero" aria-label="Destaques da loja" data-hero-carousel>
         @foreach ($slidesHero as $indice => $slide)
             <article
@@ -53,10 +33,11 @@
                 <div class="container-app hero__inner">
                     <div class="hero__content">
                         <p class="hero__eyebrow">{{ $slide['eyebrow'] ?? '' }}</p>
-                        <h1>
+                        @php($tagTitulo = $loop->first ? 'h1' : 'p')
+                        <{{ $tagTitulo }} class="hero__title" @if (! $loop->first) aria-hidden="true" @endif>
                             {{ $slide['title'] ?? '' }}
                             <span>{{ $slide['highlight'] ?? '' }}</span>
-                        </h1>
+                        </{{ $tagTitulo }}>
                         <p class="hero__description">{{ $slide['description'] ?? '' }}</p>
                         <div class="hero__actions">
                             <a href="{{ $slide['link'] ?? '#produtos' }}" class="btn btn-primary">
@@ -154,9 +135,9 @@
 
             <div class="own-piece__cta">
                 <h3>Seu bordado do jeito que você imagina!</h3>
-                <button type="button" class="btn btn-primary" data-coming-soon="Solicitação de orçamento">
+                <a href="{{ route('orcamento.index') }}" class="btn btn-primary">
                     Solicitar orçamento
-                </button>
+                </a>
             </div>
         </div>
     </section>

@@ -121,7 +121,7 @@
     .admin-select:focus-visible {
         border-color: var(--cor-rosa-botao);
         outline: none;
-        box-shadow: 0 0 0 3px rgb(171 94 124 / 18%);
+        box-shadow: 0 0 0 3px var(--sombra-foco-rosa);
     }
 
     .admin-select--sm {

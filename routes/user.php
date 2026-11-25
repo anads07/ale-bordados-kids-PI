@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/sobre', [SobreController::class, 'index'])->name('sobre');
+Route::view('/orcamento', 'user.orcamento.index')->name('orcamento.index');
 Route::get('/produtos/{produto}', [ProdutoController::class, 'show'])->name('produtos.show');
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

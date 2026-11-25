@@ -12,7 +12,7 @@
             </button>
         </header>
 
-        <p class="cart-drawer__message" data-cart-message aria-live="polite"></p>
+        <p class="cart-drawer__message" data-cart-message role="status" aria-live="polite"></p>
 
         <div class="cart-drawer__body" data-cart-items>
             @include('user.partials.cart-items', ['itens' => $itensCarrinho])

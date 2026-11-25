@@ -24,11 +24,14 @@ document.addEventListener('DOMContentLoaded', () => {
             alternadorMenu.setAttribute('aria-label', aberto ? 'Fechar menu de navegação' : 'Abrir menu de navegação');
         });
 
-        cabecalho.querySelectorAll('.header-nav a').forEach((link) => {
-            link.addEventListener('click', () => {
-                cabecalho.classList.remove('nav-open');
-                alternadorMenu.setAttribute('aria-expanded', 'false');
-            });
+        const fecharMenu = () => {
+            cabecalho.classList.remove('nav-open');
+            alternadorMenu.setAttribute('aria-expanded', 'false');
+            alternadorMenu.setAttribute('aria-label', 'Abrir menu de navegação');
+        };
+
+        cabecalho.querySelectorAll('.header-nav a, [data-cart-open]').forEach((elemento) => {
+            elemento.addEventListener('click', fecharMenu);
         });
     }
 

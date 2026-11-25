@@ -60,12 +60,14 @@
         text-transform: uppercase;
     }
 
-    .hero h1 {
+    .hero__title {
+        margin: 0;
         font-size: clamp(1.9rem, 4.2vw, 3.2rem);
+        font-weight: 600;
         line-height: 1.05;
     }
 
-    .hero h1 span {
+    .hero__title span {
         color: var(--cor-rosa-botao);
         font-family: var(--fonte-cursiva);
         font-weight: 400;

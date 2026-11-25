@@ -4,7 +4,6 @@ return [
     'store' => [
         'name' => 'Alê Bordados Kids',
         'tagline' => 'Bordados personalizados com carinho',
-        'cart_count' => 2,
         'email' => 'loja@email.com',
         'whatsapp' => '(XX) XXXXX-XXXX',
         'address' => 'Atendimento online para todo o Brasil',

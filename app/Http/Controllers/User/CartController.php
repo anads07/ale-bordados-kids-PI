@@ -44,6 +44,12 @@ class CartController extends Controller
             }
 
             throw $exception;
+        } catch (\Throwable $erro) {
+            if ($imagem) {
+                Storage::disk('public')->delete($imagem);
+            }
+
+            throw $erro;
         }
 
         return $this->responder($request, $carrinho);

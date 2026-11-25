@@ -134,6 +134,8 @@ export function iniciarCarrinho() {
                 contador.textContent = `(${dados.cart_count ?? 0})`;
             });
 
+            mostrarMensagem(mensagem, '', false);
+
             if (abrirAoFinal) {
                 abrir();
             }
@@ -153,5 +155,5 @@ function mostrarMensagem(elemento, texto, erro = false) {
     }
 
     elemento.textContent = texto;
-    elemento.classList.toggle('is-error', erro);
+    elemento.classList.toggle('is-error', erro && texto !== '');
 }

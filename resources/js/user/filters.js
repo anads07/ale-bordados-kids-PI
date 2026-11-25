@@ -2,25 +2,56 @@
 
 const CHAVE_POSICAO = 'filtros:posicao';
 
+// Lê um valor do sessionStorage sem interromper a execução.
+function lerPosicaoSalva() {
+    try {
+        return sessionStorage.getItem(CHAVE_POSICAO);
+    } catch {
+        return null;
+    }
+}
+
+// Salva ou remove a posição sem falhar em ambientes restritos.
+function escreverPosicaoSalva(posicao) {
+    try {
+        if (posicao === null) {
+            sessionStorage.removeItem(CHAVE_POSICAO);
+            return;
+        }
+
+        sessionStorage.setItem(CHAVE_POSICAO, String(posicao));
+    } catch {
+        // Ignora falhas de armazenamento para não quebrar os filtros.
+    }
+}
+
 // Restaura a posição salva e registra os eventos que a atualizam.
 export function iniciarFiltros() {
     const areaFiltros = document.querySelector('[data-filter-area]');
+    const ehHome = window.location.pathname === '/';
+
+    if (ehHome) {
+        const posicaoSalva = lerPosicaoSalva();
+        const posicao = posicaoSalva === null ? NaN : Number(posicaoSalva);
+
+        if (Number.isFinite(posicao)) {
+            history.scrollRestoration = 'manual';
+            window.scrollTo(0, posicao);
+        }
+
+        if (posicaoSalva !== null) {
+            escreverPosicaoSalva(null);
+        }
+    }
 
     if (!areaFiltros) {
         return;
     }
 
-    const posicaoSalva = sessionStorage.getItem(CHAVE_POSICAO);
-
-    if (posicaoSalva !== null) {
-        // Evita que o navegador restaure a rolagem por conta própria.
-        history.scrollRestoration = 'manual';
-        window.scrollTo(0, Number(posicaoSalva));
-        sessionStorage.removeItem(CHAVE_POSICAO);
-    }
-
     const guardarPosicao = () => {
-        sessionStorage.setItem(CHAVE_POSICAO, String(window.scrollY));
+        if (window.location.pathname === '/') {
+            escreverPosicaoSalva(window.scrollY);
+        }
     };
 
     areaFiltros.addEventListener('submit', guardarPosicao);
@@ -30,7 +61,6 @@ export function iniciarFiltros() {
         }
     });
 
-    // A busca do cabeçalho também recarrega a vitrine.
     document.querySelectorAll('[data-filter-form]').forEach((formulario) => {
         formulario.addEventListener('submit', guardarPosicao);
     });

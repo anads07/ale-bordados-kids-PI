@@ -7,7 +7,8 @@
         margin-top: 16px;
     }
 
-    .flash-message {
+    .flash-message,
+    .flash-message--error {
         padding: 12px 16px;
         border: 1px solid var(--cor-borda-aviso);
         border-radius: 12px;

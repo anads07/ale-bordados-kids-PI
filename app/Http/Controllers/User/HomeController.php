@@ -72,7 +72,7 @@ class HomeController extends Controller
 
         $depoimentos = config('mock.testimonials', []);
         $destaque = config('mock.hero', []);
-        $slidesHero = config('mock.hero_slides', []);
+        $slidesHero = $this->slidesHero($destaque);
         $ownPiece = config('mock.own_piece', []);
 
         $filtros = [
@@ -95,6 +95,49 @@ class HomeController extends Controller
             'filtros',
             'idsFavoritos'
         ));
+    }
+
+    /**
+     * Monta os slides do hero com fallback para o destaque legado.
+     *
+     * @param  array<string, mixed>  $destaque
+     * @return array<int, array<string, string>>
+     */
+    private function slidesHero(array $destaque): array
+    {
+        $slides = config('mock.hero_slides', []);
+
+        if (! is_array($slides) || $slides === []) {
+            $slides = [[
+                'imagem' => 'images/pagina_inicial/banner_1.png',
+                'alt' => 'Banner de bordado com ursinha Sara Maria',
+                'ajuste' => 'cover',
+                'posicao' => 'center center',
+                'eyebrow' => (string) ($destaque['eyebrow'] ?? 'Bordados personalizados'),
+                'title' => (string) ($destaque['title'] ?? 'Carinho em cada ponto,'),
+                'highlight' => (string) ($destaque['highlight'] ?? 'feito para o seu bebê'),
+                'description' => (string) ($destaque['description'] ?? 'Enxovais, roupas e toalhas infantis com bordados delicados e personalizados.'),
+                'acao' => 'Ver coleção',
+                'link' => '#produtos',
+            ]];
+        }
+
+        return array_values(array_map(function (mixed $slide): array {
+            $slide = is_array($slide) ? $slide : [];
+
+            return [
+                'imagem' => (string) ($slide['imagem'] ?? 'images/pagina_inicial/banner_1.png'),
+                'alt' => (string) ($slide['alt'] ?? ''),
+                'ajuste' => (string) ($slide['ajuste'] ?? 'cover'),
+                'posicao' => (string) ($slide['posicao'] ?? 'center center'),
+                'eyebrow' => (string) ($slide['eyebrow'] ?? ''),
+                'title' => (string) ($slide['title'] ?? ''),
+                'highlight' => (string) ($slide['highlight'] ?? ''),
+                'description' => (string) ($slide['description'] ?? ''),
+                'acao' => (string) ($slide['acao'] ?? 'Ver coleção'),
+                'link' => (string) ($slide['link'] ?? '#produtos'),
+            ];
+        }, $slides));
     }
 
     /**

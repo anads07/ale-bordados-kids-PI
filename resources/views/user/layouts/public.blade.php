@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Alê Bordados Kids — enxovais e roupas infantis com bordados personalizados.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
 
     <title>@yield('title', config('mock.store.name').' | Bordados personalizados')</title>
 
     {{-- Estrutura pública compartilhada pelas páginas da loja. --}}
     @vite(['resources/css/app.css', 'resources/js/user/app.js'])
 </head>
-<body>
+<body data-login-url="{{ route('login') }}">
     @include('user.partials.header')
     @include('user.partials.flash')
 
