@@ -20,7 +20,7 @@
 
         if ($slidesHero === []) {
             $slidesHero[] = [
-                'imagem' => 'images/banner-ursinha-sara-maria.png',
+                'imagem' => 'images/pagina_inicial/banner_1.png',
                 'alt' => 'Banner de bordado com ursinha Sara Maria',
                 'ajuste' => 'cover',
                 'posicao' => 'center center',
@@ -45,7 +45,7 @@
             >
                 <img
                     class="hero__image"
-                    src="{{ asset($slide['imagem'] ?? 'images/hero_banner.png') }}"
+                    src="{{ asset($slide['imagem'] ?? 'images/pagina_inicial/banner_1.png') }}"
                     alt="{{ $slide['alt'] ?? '' }}"
                     @if (! $loop->first) loading="lazy" @endif
                 >
@@ -105,7 +105,7 @@
         <div class="own-piece__inner">
             <img
                 class="own-piece__icon {{ ($ownPiece['ajuste'] ?? 'cover') === 'contain' ? 'own-piece__icon--contain' : '' }}"
-                src="{{ asset($ownPiece['imagem'] ?? 'images/produtos/body.jpeg') }}"
+                src="{{ asset($ownPiece['imagem'] ?? 'images/pagina_inicial/body.png') }}"
                 alt="{{ $ownPiece['alt'] ?? 'Peça infantil com bordado personalizado' }}"
                 style="--own-piece-fit: {{ $ownPiece['ajuste'] ?? 'cover' }}"
                 loading="lazy"
@@ -162,7 +162,7 @@
     </section>
 
     <section class="container-app home-content" id="produtos" aria-label="Catálogo de produtos">
-        <aside class="filter-panel" aria-labelledby="filtros-titulo">
+        <aside class="filter-panel" aria-labelledby="filtros-titulo" data-filter-area>
             <form method="GET" action="{{ route('home') }}">
                 <h2 id="filtros-titulo">Filtros</h2>
 

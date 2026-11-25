@@ -17,7 +17,7 @@
                     <h1>Entrar em sua conta</h1>
                 </div>
 
-                @if (str_contains((string) session('url.intended'), '/checkout'))
+                @if ($finalizandoCompra)
                     <p class="auth-card__notice">
                         Entre para finalizar sua compra — suas peças continuam guardadas na sacola.
                     </p>

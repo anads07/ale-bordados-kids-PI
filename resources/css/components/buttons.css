@@ -23,15 +23,15 @@
         transform: translateY(-1px);
     }
 
-    /* Botões primários usam o rosa suave pedido, com texto escuro para contraste. */
+    /* Botões primários seguem os tokens oficiais da identidade visual. */
     .btn-primary {
-        background-color: #DA9EA6;
-        color: var(--cor-texto);
-        box-shadow: 0 8px 18px rgba(218, 158, 166, 0.28);
+        background-color: var(--cor-rosa-botao);
+        color: var(--cor-fundo);
+        box-shadow: 0 8px 18px var(--sombra-botao-rosa);
     }
 
     .btn-primary:hover {
-        background-color: #C98C95;
+        background-color: var(--cor-rosa-escuro);
     }
 
     .btn-outline {

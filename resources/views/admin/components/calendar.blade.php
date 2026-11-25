@@ -11,9 +11,7 @@
     $dataSelecionada = $dataSelecionada ?? now();
     $diasDaSemana = config('mock.admin.weekdays', []);
     $meses = config('mock.admin.months', []);
-    $anosCalendario = collect($anosCalendario ?: range(now()->year - 1, now()->year + 2))
-        ->push($mes->year)
-        ->unique()
+    $anosCalendario = collect($anosCalendario ?: [now()->year])
         ->sort()
         ->values()
         ->all();
@@ -32,7 +30,7 @@
         <strong>{{ ucfirst($meses[$mes->month] ?? $mes->format('F')) }} {{ $mes->year }}</strong>
 
         <form action="{{ route('admin.pedidos.index') }}" method="GET" class="admin-calendar__filters">
-            <select name="mes" data-admin-auto-submit aria-label="Mês do calendário">
+            <select name="mes" class="admin-select admin-select--sm" data-admin-auto-submit aria-label="Mês do calendário">
                 @foreach ($meses as $numeroMes => $nomeMes)
                     <option value="{{ $numeroMes }}" @selected((int) $numeroMes === $mes->month)>
                         {{ ucfirst($nomeMes) }}
@@ -40,7 +38,7 @@
                 @endforeach
             </select>
 
-            <select name="ano" data-admin-auto-submit aria-label="Ano do calendário">
+            <select name="ano" class="admin-select admin-select--sm" data-admin-auto-submit aria-label="Ano do calendário">
                 @foreach ($anosCalendario as $ano)
                     <option value="{{ $ano }}" @selected((int) $ano === $mes->year)>{{ $ano }}</option>
                 @endforeach

@@ -110,6 +110,10 @@ class HomeController extends Controller
      */
     private function numero(mixed $valor): ?float
     {
-        return is_numeric($valor) ? (float) $valor : null;
+        if (! is_numeric($valor)) {
+            return null;
+        }
+
+        return max(0, (float) $valor);
     }
 }

@@ -3,10 +3,10 @@
     <div class="container-app header-inner">
         <a href="{{ route('home') }}" class="logo-script" aria-label="Alê Bordados Kids — Início">
         {{ config('mock.store.name') }}
-        <img src="{{ asset('images/logo_costura.png') }}" alt="" class="logo-costura">
+        <img src="{{ asset('images/pagina_inicial/logo_costura.png') }}" alt="" class="logo-costura">
         </a>
 
-        <form class="search-form" action="{{ route('home') }}" method="GET" role="search">
+        <form class="search-form" action="{{ route('home') }}" method="GET" role="search" data-filter-form>
             <label class="sr-only" for="busca-produtos">Buscar produtos</label>
             <input
                 id="busca-produtos"

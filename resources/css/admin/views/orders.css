@@ -403,23 +403,20 @@
     .admin-order-modal__status select {
         min-width: 0;
         min-height: 42px;
-        padding: 8px 12px;
-        border: 1px solid var(--cor-borda-forte);
-        border-radius: 999px;
-        background-color: var(--cor-fundo);
-        color: var(--cor-texto);
+        padding-block: 8px;
         font-size: 0.78rem;
-        font-weight: 700;
-    }
-
-    .admin-order-modal__actions > .btn,
-    .admin-order-modal__status .btn {
-        min-height: 48px;
-        border-radius: 8px;
     }
 
     .admin-order-modal__actions > .btn {
+        min-height: 48px;
+        border-radius: 8px;
         align-self: end;
+    }
+
+    .admin-order-modal__status .btn {
+        min-height: 42px;
+        border-radius: 8px;
+        font-size: 0.76rem;
     }
 }
 

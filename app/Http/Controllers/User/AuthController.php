@@ -27,7 +27,15 @@ class AuthController extends Controller
             return $this->redirecionarUsuarioAutenticado(Auth::user());
         }
 
-        return view('user.auth.login');
+        // Só avisa sobre o checkout quando a visita ao login veio do próprio
+        // checkout ou de uma tentativa de login que falhou.
+        $intencao = (string) session('url.intended');
+        $finalizandoCompra = str_contains($intencao, '/checkout')
+            && (url()->previous() === route('checkout.index') || session()->has('_old_input'));
+
+        return view('user.auth.login', [
+            'finalizandoCompra' => $finalizandoCompra,
+        ]);
     }
 
     /**

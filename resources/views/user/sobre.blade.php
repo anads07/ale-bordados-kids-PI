@@ -18,7 +18,7 @@
         <div class="container-app about-grid">
             <figure class="about-media about-media--large">
                 <img
-                    src="{{ asset('images/produtos/kit-fralda.jpeg') }}"
+                    src="{{ asset('images/sobre_nos/kit-fralda.jpeg') }}"
                     alt="Kit de fralda com bordado delicado"
                     loading="lazy"
                 >
@@ -52,7 +52,7 @@
 
             <figure class="about-media about-media--small">
                 <img
-                    src="{{ asset('images/produtos/body-calca.jpeg') }}"
+                    src="{{ asset('images/sobre_nos/body-calca.jpeg') }}"
                     alt="Conjunto infantil com bordado personalizado"
                     loading="lazy"
                 >

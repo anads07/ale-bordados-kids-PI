@@ -2,12 +2,14 @@
 
 import { iniciarCarrinho } from './cart';
 import { iniciarFavoritos } from './favorites';
+import { iniciarFiltros } from './filters';
 import { iniciarCarrosselHero } from './hero';
 import { iniciarDetalheProduto } from './product';
 
 document.addEventListener('DOMContentLoaded', () => {
     iniciarCarrinho();
     iniciarFavoritos();
+    iniciarFiltros();
     iniciarCarrosselHero();
     iniciarDetalheProduto();
 

@@ -29,6 +29,7 @@ class DashboardController extends Controller
         $painel = config('mock.admin.dashboard');
         $meses = config('mock.admin.months', []);
         $anos = $painel['financial']['years'] ?? [now()->year];
+        $anosReceita = $painel['revenue']['years'] ?? [now()->year];
         $mesSelecionado = $this->resolverMes($request->query('mes'));
         $anoSelecionado = $this->resolverAno($request->query('ano'), $anos);
 
@@ -37,6 +38,11 @@ class DashboardController extends Controller
             'year_options' => $anos,
             'selected_month' => $mesSelecionado,
             'selected_year' => $anoSelecionado,
+        ];
+
+        $painel['revenue'] += [
+            'year_options' => $anosReceita,
+            'selected_year' => $this->resolverAno($request->query('ano_receita'), $anosReceita),
         ];
 
         return view('admin.dashboard', [

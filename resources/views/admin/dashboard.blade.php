@@ -21,7 +21,7 @@
                     <h2 class="admin-card__title">Resumo financeiro:</h2>
 
                     <form action="{{ route('admin.dashboard') }}" method="GET" class="admin-financial__filter">
-                        <select name="mes" data-admin-auto-submit aria-label="Mês do resumo financeiro">
+                        <select name="mes" class="admin-select" data-admin-auto-submit aria-label="Mês do resumo financeiro">
                             @foreach ($painel['financial']['month_options'] as $valorMes => $nomeMes)
                                 <option value="{{ $valorMes }}" @selected((int) $painel['financial']['selected_month'] === (int) $valorMes)>
                                     {{ ucfirst($nomeMes) }}
@@ -29,7 +29,7 @@
                             @endforeach
                         </select>
 
-                        <select name="ano" data-admin-auto-submit aria-label="Ano do resumo financeiro">
+                        <select name="ano" class="admin-select" data-admin-auto-submit aria-label="Ano do resumo financeiro">
                             @foreach ($painel['financial']['year_options'] as $ano)
                                 <option value="{{ $ano }}" @selected((int) $painel['financial']['selected_year'] === (int) $ano)>
                                     {{ $ano }}
@@ -71,17 +71,6 @@
 
                             <span class="admin-pending__title">{{ $pendente['title'] }}</span>
                             <span class="admin-pending__description">{{ $pendente['description'] }}</span>
-
-                            <button
-                                type="button"
-                                class="admin-icon-button"
-                                data-chat-open
-                                data-chat-name="Cliente"
-                                data-chat-message="{{ $pendente['description'] }}"
-                                aria-label="Abrir chat sobre {{ $pendente['title'] }}"
-                            >
-                                <x-lucide-message-circle-more aria-hidden="true" />
-                            </button>
                         </li>
                     @endforeach
                 </ul>
@@ -93,7 +82,7 @@
 
                     <form action="{{ route('admin.dashboard') }}" method="GET" class="admin-filter">
                         <label for="status">Status:</label>
-                        <select id="status" name="status" data-admin-auto-submit>
+                        <select id="status" name="status" class="admin-select" data-admin-auto-submit>
                             <option value="">Todos</option>
                             @foreach ($situacoes as $valorStatus => $configuracaoStatus)
                                 <option value="{{ $valorStatus }}" @selected($situacaoAtual === $valorStatus)>{{ $configuracaoStatus['label'] }}</option>
@@ -179,7 +168,19 @@
             </section>
 
             <section class="admin-card admin-chart-card">
-                <h2 class="admin-card__title">{{ $painel['revenue']['title'] }}</h2>
+                <header class="admin-chart-card__header">
+                    <h2 class="admin-card__title">{{ $painel['revenue']['title'] }}</h2>
+
+                    <form action="{{ route('admin.dashboard') }}" method="GET" class="admin-financial__filter">
+                        <select name="ano_receita" class="admin-select" data-admin-auto-submit aria-label="Ano do faturamento">
+                            @foreach ($painel['revenue']['year_options'] as $anoReceita)
+                                <option value="{{ $anoReceita }}" @selected((int) $painel['revenue']['selected_year'] === (int) $anoReceita)>
+                                    {{ $anoReceita }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </form>
+                </header>
 
                 <x-admin::line-chart
                     :rotulos="$painel['revenue']['labels']"

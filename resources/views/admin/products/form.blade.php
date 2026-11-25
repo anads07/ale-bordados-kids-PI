@@ -9,10 +9,12 @@
     @endphp
 
     <div class="container-app admin-container admin-product-form-page">
-        <a href="{{ route('admin.produtos.index') }}" class="admin-back-link">
-            <x-lucide-chevron-left aria-hidden="true" />
-            Voltar para produtos
-        </a>
+        @if ($editando)
+            <a href="{{ route('admin.produtos.index') }}" class="admin-back-link">
+                <x-lucide-chevron-left aria-hidden="true" />
+                Voltar para produtos
+            </a>
+        @endif
 
         <header class="admin-product-form__heading">
             <div>

@@ -24,9 +24,9 @@ return [
     ],
 
     'own_piece' => [
-        'imagem' => 'images/body.png',
+        'imagem' => 'images/pagina_inicial/body.png',
         'alt' => 'Peça infantil com bordado personalizado',
-    
+
         'ajuste' => 'contain',
     ],
 
@@ -37,10 +37,9 @@ return [
         'description' => 'Enxovais, roupas e toalhas infantis com bordados delicados e personalizados para eternizar os primeiros momentos.',
     ],
 
-
     'hero_slides' => [
         [
-            'imagem' => 'images/hero_banner.png',
+            'imagem' => 'images/pagina_inicial/banner_1.png',
             'alt' => 'Banner de bordado com ursinha Sara Maria',
             'ajuste' => 'cover',
             'posicao' => 'center center',
@@ -52,7 +51,7 @@ return [
             'link' => '#produtos',
         ],
         [
-            'imagem' => 'images/maria_flor.png',
+            'imagem' => 'images/pagina_inicial/banner_2.png',
             'alt' => 'Kit de fraldas bordadas para enxoval',
             'ajuste' => 'cover',
             'posicao' => 'center 40%',
@@ -64,7 +63,7 @@ return [
             'link' => '#produtos',
         ],
         [
-            'imagem' => 'images/agata.png',
+            'imagem' => 'images/pagina_inicial/banner_3.png',
             'alt' => 'Body infantil com bordado personalizado',
             'ajuste' => 'cover',
             'posicao' => 'center 30%',
@@ -135,7 +134,6 @@ return [
         ],
     ],
 
-
     'personalizacao' => [
         'cores_produto' => [
             'Branco',
@@ -166,7 +164,7 @@ return [
     ],
 
     'admin' => [
-       
+
         'nav' => [
             [
                 'label' => 'Início',
@@ -218,6 +216,7 @@ return [
             ],
             'revenue' => [
                 'title' => 'Faturamento:',
+                'years' => [2026],
                 'labels' => ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],
                 'values' => [8200, 12000, 9800, 11200, 10400, 12600, 13800, 12900, 14600, 13200, 15800, 17200],
                 'min' => 4000,
@@ -227,7 +226,7 @@ return [
                 'fill' => true,
             ],
             'financial' => [
-                'years' => [2025, 2026],
+                'years' => [2026],
                 'year_factors' => [2025 => 0.88, 2026 => 1.0],
                 'months' => [
                     1 => ['revenue' => 28900, 'completed' => 15, 'sold' => 34],
@@ -261,6 +260,7 @@ return [
         ],
 
         'orders' => [
+            'years' => [2026],
             'chart' => [
                 'title' => 'Pedidos e entregas',
                 'labels' => ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'],

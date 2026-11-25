@@ -51,23 +51,23 @@ class CheckoutController extends Controller
         }
 
         $dados = $request->validate([
-            'cep' => ['required', 'string', 'max:9'],
+            'cep' => ['required', 'string', 'regex:/^\d{5}-?\d{3}$/'],
             'endereco' => ['required', 'string', 'max:255'],
             'numero' => ['required', 'string', 'max:20'],
             'complemento' => ['nullable', 'string', 'max:255'],
             'bairro' => ['required', 'string', 'max:100'],
             'cidade' => ['required', 'string', 'max:100'],
-            'estado' => ['required', 'string', 'size:2'],
+            'estado' => ['required', 'string', 'regex:/^[A-Za-z]{2}$/'],
             'forma_pagamento' => ['required', 'string', Rule::in(config('mock.payments', []))],
         ], [
             'cep.required' => 'Informe o CEP de entrega.',
-            'cep.max' => 'O CEP deve ter no máximo 9 caracteres.',
+            'cep.regex' => 'Informe um CEP válido.',
             'endereco.required' => 'Informe o endereço de entrega.',
             'numero.required' => 'Informe o número do endereço.',
             'bairro.required' => 'Informe o bairro.',
             'cidade.required' => 'Informe a cidade.',
             'estado.required' => 'Informe o estado.',
-            'estado.size' => 'Use a sigla do estado com 2 letras.',
+            'estado.regex' => 'Use a sigla do estado com 2 letras.',
             'forma_pagamento.required' => 'Selecione a forma de pagamento.',
             'forma_pagamento.in' => 'Selecione uma forma de pagamento válida.',
         ]);

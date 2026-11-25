@@ -107,13 +107,13 @@
                 <label for="pedido-status-{{ $pedido->id_pedido }}">Status do pedido</label>
 
                 <div class="admin-order-modal__status-row">
-                    <select id="pedido-status-{{ $pedido->id_pedido }}" name="status">
+                    <select id="pedido-status-{{ $pedido->id_pedido }}" name="status" class="admin-select">
                         @foreach ($situacoes as $chaveStatus => $configuracaoStatus)
                             <option value="{{ $chaveStatus }}" @selected($pedido->status === $chaveStatus)>{{ $configuracaoStatus['label'] }}</option>
                         @endforeach
                     </select>
 
-                    <button type="submit" class="btn btn-primary">Atualizar status</button>
+                    <button type="submit" class="btn btn-outline">Atualizar status</button>
                 </div>
             </form>
 

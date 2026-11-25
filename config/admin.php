@@ -1,10 +1,7 @@
 <?php
 
 return [
-    /* Credenciais administrativas:
-     * O painel exige is_admin e o e-mail definido no ambiente.
-     * O seeder também exige uma senha configurada.
-     */
+    // O painel exige is_admin e o e-mail definido no ambiente.
     'email' => env('ADMIN_EMAIL'),
     'password' => env('ADMIN_PASSWORD'),
 ];

@@ -48,7 +48,7 @@ class PedidoController extends Controller
             'diasComPedidos' => $diasComPedidos,
             'dataAnterior' => $dataSelecionada->copy()->subDay(),
             'dataProxima' => $dataSelecionada->copy()->addDay(),
-            'anosCalendario' => range(now()->year - 1, now()->year + 2),
+            'anosCalendario' => config('mock.admin.orders.years', [now()->year]),
             'situacoes' => config('mock.status', []),
             'pedidosMock' => config('mock.admin.orders'),
         ]);

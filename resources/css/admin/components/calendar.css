@@ -22,30 +22,19 @@
         gap: 6px;
     }
 
-    .admin-calendar__filters select {
-        min-height: 30px;
-        padding: 4px 8px;
-        border: 1px solid var(--cor-borda-forte);
-        border-radius: 999px;
-        background-color: var(--cor-fundo);
-        color: var(--cor-texto);
-        font-size: 0.7rem;
-        font-weight: 700;
-    }
-
     .admin-calendar__grid {
         display: grid;
         grid-template-columns: repeat(7, minmax(0, 1fr));
-        border-top: 1px solid var(--cor-borda-forte);
-        border-left: 1px solid var(--cor-borda-forte);
+        border-top: 1px solid var(--cor-borda);
+        border-left: 1px solid var(--cor-borda);
     }
 
     .admin-calendar__weekday {
         padding: 9px 4px;
-        border-right: 1px solid var(--cor-borda-forte);
-        border-bottom: 1px solid var(--cor-borda-forte);
-        background-color: var(--cor-fundo-secundario);
-        color: var(--cor-texto-suave);
+        border-right: 1px solid var(--cor-borda);
+        border-bottom: 1px solid var(--cor-borda);
+        background-color: var(--cor-rosa-claro);
+        color: var(--cor-rosa-escuro);
         font-size: 0.68rem;
         font-weight: 700;
         text-align: center;
@@ -56,8 +45,8 @@
         align-items: center;
         justify-content: center;
         aspect-ratio: 1.28;
-        border-right: 1px solid var(--cor-borda-forte);
-        border-bottom: 1px solid var(--cor-borda-forte);
+        border-right: 1px solid var(--cor-borda);
+        border-bottom: 1px solid var(--cor-borda);
         background-color: var(--cor-fundo);
         color: var(--cor-texto);
         font-size: 0.76rem;
@@ -71,7 +60,7 @@
     }
 
     .admin-calendar__day.is-outside {
-        background-color: var(--cor-fundo-admin);
+        background-color: var(--cor-fundo-secundario);
         color: var(--cor-calendario-inativo);
     }
 

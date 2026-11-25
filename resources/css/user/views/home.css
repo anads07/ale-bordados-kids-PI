@@ -5,9 +5,11 @@
         position: relative;
         display: grid;
         align-items: center;
+        width: 100%;
+        margin-inline: 0;
         overflow: hidden;
         aspect-ratio: 2048 / 768;
-        min-height: 360px;
+        min-height: 0;
         background-color: var(--cor-fundo-secundario);
     }
 
@@ -499,13 +501,47 @@
     }
 }
 
+/* Em telas próximas da largura do container as setas encostam no texto do banner. */
+@media (min-width: 901px) and (max-width: 1180px) {
+    .hero__inner {
+        padding-inline: 80px;
+    }
+}
+
 @media (max-width: 900px) {
     .hero {
-        min-height: 320px;
+        /* A imagem ocupa a largura toda e o texto passa a ficar abaixo dela. */
+        --hero-mobile-image-height: 37.5vw;
+        aspect-ratio: auto;
+        min-height: 0;
     }
 
     .hero__slide {
-        padding-block: 44px;
+        display: block;
+        min-height: 0;
+        padding-block: 0 32px;
+    }
+
+    .hero__image {
+        position: static;
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .hero__inner {
+        padding-block: 24px 0;
+    }
+
+    .hero__arrow {
+        top: calc(var(--hero-mobile-image-height) / 2);
+    }
+
+    .hero__dots {
+        top: calc(var(--hero-mobile-image-height) - 28px);
+        bottom: auto;
     }
 
     .own-piece__inner {
@@ -564,11 +600,11 @@
 
 @media (max-width: 600px) {
     .hero {
-        min-height: 380px;
+        min-height: 0;
     }
 
     .hero__slide {
-        padding-block: 30px;
+        padding-block: 0 28px;
     }
 
     .hero__arrow {
@@ -585,7 +621,8 @@
     }
 
     .hero__dots {
-        bottom: 12px;
+        top: calc(var(--hero-mobile-image-height) - 24px);
+        bottom: auto;
     }
 
     .hero__actions .btn {

@@ -20,6 +20,7 @@
         <div class="container-app admin-header__inner">
             <a href="{{ route('admin.dashboard') }}" class="logo-script admin-logo" aria-label="Alê Bordados Kids — Painel administrativo">
                 {{ config('mock.store.name') }}
+                <img src="{{ asset('images/pagina_inicial/logo_costura.png') }}" alt="" class="logo-costura">
             </a>
 
             <nav class="admin-nav" aria-label="Navegação administrativa">

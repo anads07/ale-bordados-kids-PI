@@ -3,7 +3,7 @@
 ## 1. Diretrizes Gerais e Estilo Visual
 
 - **Estilo:** Baseado nos wireframes iniciais e no guia de identidade visual, o layout adota um padrão claro, minimalista e limpo (fundo principal em branco e cinza claro `--cor-fundo-secundario`), priorizando a usabilidade e a hierarquia visual.
-- **Vitrine:** O hero usa `public/images/hero_banner.png` como fundo e exibe somente os textos da chamada e o botão “Ver coleção”; não adiciona formas, laços ou outros símbolos via HTML/CSS. O botão de orçamento permanece somente no bloco de peça própria. Os filtros disponíveis são busca, categoria, faixa de preço e ordenação, sem filtro de popularidade.
+- **Vitrine:** O hero usa os banners de `public/images/pagina_inicial/` (`banner_1.png`, `banner_2.png` e `banner_3.png`) como fundo e exibe somente os textos da chamada e o botão “Ver coleção”; não adiciona formas, laços ou outros símbolos via HTML/CSS. O botão de orçamento permanece somente no bloco de peça própria. Os filtros disponíveis são busca, categoria, faixa de preço e ordenação, sem filtro de popularidade.
 - **Responsividade Obrigatória:**
     - **Desktop (Acima de 900px):** Layout completo (largura máxima de 1180px), filtros dispostos ao lado dos produtos na home e painel administrativo estruturado em colunas[cite: 6].
     - **Tablet e Celular (Até 900px):** Adaptação para colunas em formato de pilha única (filtros no topo, formulários empilhados)[cite: 6].
