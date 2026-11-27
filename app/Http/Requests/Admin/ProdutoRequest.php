@@ -10,11 +10,7 @@ class ProdutoRequest extends FormRequest
     // Confirma que somente o administrador autorizado envie o formulário.
     public function authorize(): bool
     {
-        $usuario = $this->user();
-        $emailAdministrativo = (string) config('admin.email');
-
-        return (bool) $usuario?->is_admin
-            && strcasecmp((string) $usuario->email, $emailAdministrativo) === 0;
+        return (bool) $this->user()?->isAdminAutorizado();
     }
 
     // Define as regras de cadastro e edição.

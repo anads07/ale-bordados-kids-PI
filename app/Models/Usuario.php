@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
- * Model de autenticação da tabela oficial "usuarios". Mapeia a chave primária
- * id_us e a coluna senha para o fluxo nativo de autenticação do Laravel.
+ * Model de autenticação da tabela oficial "usuarios".
  */
 class Usuario extends Authenticatable
 {
@@ -39,6 +38,13 @@ class Usuario extends Authenticatable
     public function pedidos(): HasMany
     {
         return $this->hasMany(Pedido::class, 'usuario', 'id_us');
+    }
+
+    // Confirma a flag de admin e o e-mail administrativo configurado.
+    public function isAdminAutorizado(): bool
+    {
+        return $this->is_admin
+            && strcasecmp((string) $this->email, (string) config('admin.email')) === 0;
     }
 
     // Identifica a coluna de senha usada na autenticação.

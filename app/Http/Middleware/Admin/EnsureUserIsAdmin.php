@@ -7,20 +7,14 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Bloqueia clientes autenticados na área administrativa e libera apenas
- * usuários com a flag is_admin ativa e o e-mail administrativo configurado.
+ * Restringe a área administrativa ao usuário autorizado.
  */
 class EnsureUserIsAdmin
 {
-    /**
-     * Verifica as duas camadas de permissão antes de entregar a requisição.
-     */
+    // Confirma a flag de admin e o e-mail configurado antes de seguir.
     public function handle(Request $request, Closure $next): Response
     {
-        $usuario = $request->user();
-        $emailAdministrativo = (string) config('admin.email');
-
-        if (! $usuario?->is_admin || strcasecmp((string) $usuario->email, $emailAdministrativo) !== 0) {
+        if (! $request->user()?->isAdminAutorizado()) {
             abort(403, 'Acesso restrito ao administrador.');
         }
 

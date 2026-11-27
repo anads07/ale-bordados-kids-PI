@@ -24,8 +24,7 @@
                 <strong data-cart-total>{{ $totalCarrinhoFormatado }}</strong>
             </div>
 
-            {{-- Sempre navega para o checkout: visitantes são levados ao login
-                 e, após autenticar, retornam ao checkout com a sacola preservada. --}}
+            {{-- Visitantes são levados ao login e retornam ao checkout com a sacola preservada. --}}
             <a href="{{ route('checkout.index') }}" class="btn btn-primary cart-drawer__checkout">
                 Finalizar compra
             </a>

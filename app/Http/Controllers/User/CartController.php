@@ -10,17 +10,14 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\ValidationException;
+use Throwable;
 
 /**
- * Controller do carrinho: cria linhas personalizadas, atualiza quantidades e
- * remove itens. Responde em JSON para o drawer e mantém fallback por redirect.
+ * Controller do carrinho: cria, atualiza e remove linhas personalizadas.
  */
 class CartController extends Controller
 {
-    /**
-     * Adiciona uma peça personalizada ao carrinho.
-     */
+    // Adiciona uma peça personalizada e remove a imagem se o carrinho falhar.
     public function adicionar(AddToCartRequest $request, Produto $produto, CartService $carrinho): JsonResponse|RedirectResponse
     {
         $dados = $request->validated();
@@ -38,13 +35,7 @@ class CartController extends Controller
 
         try {
             $carrinho->adicionar($produto, $personalizacao, (int) $dados['quantidade']);
-        } catch (ValidationException $exception) {
-            if ($imagem) {
-                Storage::disk('public')->delete($imagem);
-            }
-
-            throw $exception;
-        } catch (\Throwable $erro) {
+        } catch (Throwable $erro) {
             if ($imagem) {
                 Storage::disk('public')->delete($imagem);
             }
@@ -55,9 +46,7 @@ class CartController extends Controller
         return $this->responder($request, $carrinho);
     }
 
-    /**
-     * Atualiza a quantidade de uma linha existente.
-     */
+    // Atualiza a quantidade de uma linha existente.
     public function atualizar(Request $request, string $linha, CartService $carrinho): JsonResponse|RedirectResponse
     {
         $dados = $request->validate([
@@ -69,9 +58,7 @@ class CartController extends Controller
         return $this->responder($request, $carrinho);
     }
 
-    /**
-     * Remove uma linha do carrinho.
-     */
+    // Remove uma linha do carrinho.
     public function remover(Request $request, string $linha, CartService $carrinho): JsonResponse|RedirectResponse
     {
         $carrinho->remover($linha);

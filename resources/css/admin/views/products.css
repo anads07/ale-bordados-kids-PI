@@ -535,7 +535,7 @@
     }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 900px) {
     .admin-product-form__layout {
         grid-template-columns: 1fr;
     }
@@ -554,7 +554,7 @@
     }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 700px) {
     .admin-products__header,
     .admin-product-form__heading {
         align-items: flex-start;

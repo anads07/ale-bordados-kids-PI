@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Área administrativa do Alê Bordados Kids.">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" href="{{ asset('favicon.ico') }}?v=2" sizes="any">
 
     <title>@yield('title', 'Painel administrativo | '.config('mock.store.name'))</title>
 

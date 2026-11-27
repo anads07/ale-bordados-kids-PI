@@ -12,9 +12,7 @@ class FavoriteService
 {
     public const SESSION_KEY = 'favoritos';
 
-    /**
-     * Retorna apenas IDs válidos, únicos e numéricos.
-     */
+    // Retorna apenas IDs válidos, únicos e numéricos.
     public function ids(): array
     {
         $dados = session()->get(self::SESSION_KEY, []);
@@ -29,9 +27,7 @@ class FavoriteService
         )));
     }
 
-    /**
-     * Verifica se o produto já está entre os favoritos.
-     */
+    // Verifica se o produto já está entre os favoritos.
     public function has(Produto|int $produto): bool
     {
         $id = $produto instanceof Produto ? (int) $produto->id_pr : (int) $produto;
@@ -39,9 +35,7 @@ class FavoriteService
         return in_array($id, $this->ids(), true);
     }
 
-    /**
-     * Alterna o favorito e devolve o novo estado booleano.
-     */
+    // Alterna o favorito e devolve o novo estado.
     public function toggle(Produto $produto): bool
     {
         $identificadores = $this->ids();
@@ -61,17 +55,13 @@ class FavoriteService
         return $favoritado;
     }
 
-    /**
-     * Conta os favoritos ativos.
-     */
+    // Conta os favoritos ativos.
     public function count(): int
     {
         return count($this->ids());
     }
 
-    /**
-     * Busca os produtos na ordem original do catálogo, ignorando IDs removidos.
-     */
+    // Busca os produtos na ordem do catálogo, ignorando IDs removidos.
     public function produtos(): Collection
     {
         $identificadores = $this->ids();

@@ -15,19 +15,7 @@
             <p>{{ $itemCarrinho['produto']->preco_formatado }}</p>
 
             <ul class="cart-item__customization">
-                <li>Cor da peça: {{ $itemCarrinho['personalizacao']['cor_produto'] }}</li>
-                @if ($itemCarrinho['personalizacao']['escrita'])
-                    <li>Texto: {{ $itemCarrinho['personalizacao']['escrita'] }}</li>
-                @endif
-                @if ($itemCarrinho['personalizacao']['cor_escrita'])
-                    <li>Cor da linha: {{ $itemCarrinho['personalizacao']['cor_escrita'] }}</li>
-                @endif
-                @if ($itemCarrinho['personalizacao']['fonte_escrita'])
-                    <li>Fonte: {{ $itemCarrinho['personalizacao']['fonte_escrita'] }}</li>
-                @endif
-                @if ($itemCarrinho['personalizacao']['desenho'])
-                    <li>Desenho: {{ $itemCarrinho['personalizacao']['desenho'] }}</li>
-                @endif
+                <x-shared::product-customization :personalizacao="$itemCarrinho['personalizacao']" />
             </ul>
 
             @if ($itemCarrinho['imagem_inspiracao_url'])

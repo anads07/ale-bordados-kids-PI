@@ -6,22 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * Valida a personalização enviada pela página do produto antes de criar
- * uma linha no carrinho, incluindo a imagem opcional de inspiração.
+ * Valida a personalização antes de criar uma linha no carrinho.
  */
 class AddToCartRequest extends FormRequest
 {
-    /**
-     * Autoriza a adição ao carrinho para visitantes e clientes autenticados.
-     */
+    // Autoriza a adição para visitantes e clientes autenticados.
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Define as regras de validação da personalização.
-     */
+    // Define as regras de validação da personalização.
     public function rules(): array
     {
         $produto = $this->route('produto');
@@ -40,9 +35,7 @@ class AddToCartRequest extends FormRequest
         ];
     }
 
-    /**
-     * Define mensagens de erro em português.
-     */
+    // Define mensagens de erro em português.
     public function messages(): array
     {
         return [

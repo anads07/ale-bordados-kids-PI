@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 
 /**
- * Model da tabela oficial "pedidos": cada linha representa um produto
- * personalizado finalizado pelo cliente e vinculado ao usuário autenticado.
+ * Model da tabela oficial "pedidos", uma linha por peça personalizada.
  */
 class Pedido extends Model
 {
@@ -49,26 +48,35 @@ class Pedido extends Model
     ];
 
     /**
-     * Relaciona o pedido ao usuário responsável pela compra. O nome evita
-     * conflito com a coluna "usuario", que guarda apenas o ID no banco.
+     * Reúne a personalização em um array usado pelos componentes de exibição.
+     *
+     * @return array<string, string|null>
      */
+    public function getPersonalizacaoAttribute(): array
+    {
+        return [
+            'cor_produto' => $this->cor_produto,
+            'escrita' => $this->escrita,
+            'cor_escrita' => $this->cor_escrita,
+            'fonte_escrita' => $this->fonte_escrita,
+            'desenho' => $this->desenho,
+            'observacoes' => $this->observacoes,
+        ];
+    }
+
+    // Relaciona o pedido ao usuário comprador.
     public function cliente(): BelongsTo
     {
         return $this->belongsTo(Usuario::class, 'usuario', 'id_us');
     }
 
-    /**
-     * Relaciona o pedido ao produto personalizado. O nome evita conflito com
-     * a coluna "produto", que guarda apenas o ID no banco.
-     */
+    // Relaciona o pedido ao produto personalizado.
     public function produtoRelacionado(): BelongsTo
     {
         return $this->belongsTo(Produto::class, 'produto', 'id_pr');
     }
 
-    /**
-     * Resolve a URL pública da imagem de inspiração salva no disco public.
-     */
+    // Resolve a URL pública da imagem de inspiração salva no disco public.
     public function getImagemInspiracaoUrlAttribute(): ?string
     {
         if (! $this->imagem_inspiracao) {
@@ -82,9 +90,7 @@ class Pedido extends Model
         return Storage::disk('public')->url($this->imagem_inspiracao);
     }
 
-    /**
-     * Monta o endereço de entrega em uma linha legível para o painel.
-     */
+    // Monta o endereço de entrega em uma linha legível.
     public function getEnderecoFormatadoAttribute(): string
     {
         $cidadeEstado = collect([$this->cidade, $this->estado])
@@ -103,9 +109,7 @@ class Pedido extends Model
         return $partes ? implode(', ', $partes) : 'Não informado';
     }
 
-    /**
-     * Retorna o rótulo e a classe centralizados no mapa de status do projeto.
-     */
+    // Retorna o rótulo e a classe do status definidos em config.
     public function getStatusConfigAttribute(): array
     {
         return config('mock.status.'.$this->status, [
@@ -114,9 +118,7 @@ class Pedido extends Model
         ]);
     }
 
-    /**
-     * Monta as quatro etapas visuais do pedido usadas nos cartões de gerenciamento.
-     */
+    // Monta as quatro etapas visuais usadas nos cartões de gerenciamento.
     public function getEtapasAttribute(): array
     {
         $configuracao = config('mock.admin.order_stages', []);
@@ -132,9 +134,7 @@ class Pedido extends Model
             ->all();
     }
 
-    /**
-     * Calcula o valor total da linha do pedido com base no preço do produto.
-     */
+    // Calcula o total da linha pelo preço do produto.
     public function getPrecoTotalFormatadoAttribute(): string
     {
         $preco = (float) ($this->produtoRelacionado?->preco ?? 0);

@@ -9,14 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 /**
- * Controller da vitrine pública. Centraliza a busca, os filtros de categoria,
- * a faixa de preço e a ordenação dos produtos reais cadastrados no banco.
+ * Controller da vitrine pública com busca, filtros e ordenação.
  */
 class HomeController extends Controller
 {
-    /**
-     * Monta a vitrine com filtros, depoimentos e estado dos favoritos.
-     */
+    // Monta a vitrine com filtros, depoimentos e favoritos.
     public function index(Request $request, FavoriteService $favoritos): View
     {
         $busca = $this->texto($request->query('q'));
@@ -89,7 +86,6 @@ class HomeController extends Controller
             'produtos',
             'categorias',
             'depoimentos',
-            'destaque',
             'slidesHero',
             'ownPiece',
             'filtros',
@@ -105,52 +101,56 @@ class HomeController extends Controller
      */
     private function slidesHero(array $destaque): array
     {
+        $padrao = [
+            'imagem' => 'images/pagina_inicial/banner_1.png',
+            'alt' => '',
+            'ajuste' => 'cover',
+            'posicao' => 'center center',
+            'eyebrow' => '',
+            'title' => '',
+            'highlight' => '',
+            'description' => '',
+            'acao' => 'Ver coleção',
+            'link' => '#produtos',
+        ];
+
         $slides = config('mock.hero_slides', []);
 
         if (! is_array($slides) || $slides === []) {
             $slides = [[
-                'imagem' => 'images/pagina_inicial/banner_1.png',
                 'alt' => 'Banner de bordado com ursinha Sara Maria',
-                'ajuste' => 'cover',
-                'posicao' => 'center center',
                 'eyebrow' => (string) ($destaque['eyebrow'] ?? 'Bordados personalizados'),
                 'title' => (string) ($destaque['title'] ?? 'Carinho em cada ponto,'),
                 'highlight' => (string) ($destaque['highlight'] ?? 'feito para o seu bebê'),
                 'description' => (string) ($destaque['description'] ?? 'Enxovais, roupas e toalhas infantis com bordados delicados e personalizados.'),
-                'acao' => 'Ver coleção',
-                'link' => '#produtos',
             ]];
         }
 
-        return array_values(array_map(function (mixed $slide): array {
+        return array_values(array_map(function (mixed $slide) use ($padrao): array {
             $slide = is_array($slide) ? $slide : [];
 
             return [
-                'imagem' => (string) ($slide['imagem'] ?? 'images/pagina_inicial/banner_1.png'),
-                'alt' => (string) ($slide['alt'] ?? ''),
-                'ajuste' => (string) ($slide['ajuste'] ?? 'cover'),
-                'posicao' => (string) ($slide['posicao'] ?? 'center center'),
-                'eyebrow' => (string) ($slide['eyebrow'] ?? ''),
-                'title' => (string) ($slide['title'] ?? ''),
-                'highlight' => (string) ($slide['highlight'] ?? ''),
-                'description' => (string) ($slide['description'] ?? ''),
-                'acao' => (string) ($slide['acao'] ?? 'Ver coleção'),
-                'link' => (string) ($slide['link'] ?? '#produtos'),
+                'imagem' => (string) ($slide['imagem'] ?? $padrao['imagem']),
+                'alt' => (string) ($slide['alt'] ?? $padrao['alt']),
+                'ajuste' => (string) ($slide['ajuste'] ?? $padrao['ajuste']),
+                'posicao' => (string) ($slide['posicao'] ?? $padrao['posicao']),
+                'eyebrow' => (string) ($slide['eyebrow'] ?? $padrao['eyebrow']),
+                'title' => (string) ($slide['title'] ?? $padrao['title']),
+                'highlight' => (string) ($slide['highlight'] ?? $padrao['highlight']),
+                'description' => (string) ($slide['description'] ?? $padrao['description']),
+                'acao' => (string) ($slide['acao'] ?? $padrao['acao']),
+                'link' => (string) ($slide['link'] ?? $padrao['link']),
             ];
         }, $slides));
     }
 
-    /**
-     * Normaliza parâmetros de texto vindos da URL para evitar arrays ou nulos.
-     */
+    // Normaliza parâmetros de texto vindos da URL.
     private function texto(mixed $valor): string
     {
         return is_string($valor) ? trim($valor) : '';
     }
 
-    /**
-     * Normaliza parâmetros numéricos, descartando valores inválidos.
-     */
+    // Normaliza parâmetros numéricos e descarta valores inválidos.
     private function numero(mixed $valor): ?float
     {
         if (! is_numeric($valor)) {

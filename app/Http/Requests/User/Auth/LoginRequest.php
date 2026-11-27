@@ -9,17 +9,13 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class LoginRequest extends FormRequest
 {
-    /**
-     * Autoriza o envio do formulário de login.
-     */
+    // Autoriza o envio do formulário de login.
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Normaliza o e-mail para evitar diferenças de caixa e espaços nas credenciais.
-     */
+    // Normaliza o e-mail antes da validação.
     protected function prepareForValidation(): void
     {
         if (is_string($this->email)) {
@@ -27,9 +23,7 @@ class LoginRequest extends FormRequest
         }
     }
 
-    /**
-     * Define as regras de validação das credenciais.
-     */
+    // Define as regras de validação das credenciais.
     public function rules(): array
     {
         return [
@@ -38,9 +32,7 @@ class LoginRequest extends FormRequest
         ];
     }
 
-    /**
-     * Define mensagens de erro em português.
-     */
+    // Define mensagens de erro em português.
     public function messages(): array
     {
         return [

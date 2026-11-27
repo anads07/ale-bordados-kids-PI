@@ -6,6 +6,23 @@ use App\Models\Produto;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Monta os itens do carrinho com dados do produto e valores formatados.
+ *
+ * @phpstan-import-type ConteudoCarrinho from CartLineNormalizer
+ * @phpstan-import-type PersonalizacaoCarrinho from CartLineNormalizer
+ *
+ * @phpstan-type ItemCarrinho array{
+ *     linha_id: string,
+ *     produto: Produto,
+ *     quantidade: int,
+ *     personalizacao: PersonalizacaoCarrinho,
+ *     imagem_inspiracao: string|null,
+ *     imagem_inspiracao_url: string|null,
+ *     subtotal: float,
+ *     subtotal_formatado: string
+ * }
+ */
 class CartPresenter
 {
     /**
@@ -63,11 +80,13 @@ class CartPresenter
         return (float) $itens->sum('subtotal');
     }
 
+    // Formata o valor no padrão brasileiro.
     public function formatarValor(float $valor): string
     {
         return 'R$ '.number_format($valor, 2, ',', '.');
     }
 
+    // Retorna a URL pública da imagem de inspiração quando o arquivo existe.
     private function urlImagem(?string $caminho): ?string
     {
         if (! $caminho || ! Storage::disk('public')->exists($caminho)) {

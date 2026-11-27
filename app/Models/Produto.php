@@ -30,10 +30,7 @@ class Produto extends Model
         'permite_fonte',
     ];
 
-    /**
-     * Mantém os controles de personalização tipados como booleanos para que
-     * as views administrativas e futuras regras da vitrine os interpretem bem.
-     */
+    // Tipa preço, estoque e os controles de personalização.
     protected $casts = [
         'preco' => 'decimal:2',
         'estoque' => 'integer',
@@ -42,18 +39,13 @@ class Produto extends Model
         'permite_fonte' => 'boolean',
     ];
 
-    /**
-     * Lista os pedidos personalizados que usam este produto.
-     */
+    // Lista os pedidos que usam este produto.
     public function pedidos(): HasMany
     {
         return $this->hasMany(Pedido::class, 'produto', 'id_pr');
     }
 
-    /**
-     * Resolve a URL da imagem real do produto ou retorna null quando o arquivo
-     * ainda não existe em public/images/produtos.
-     */
+    // Resolve a URL da imagem real do produto quando o arquivo existe.
     public function getImagemUrlAttribute(): ?string
     {
         if ($this->imagem && file_exists(public_path('images/produtos/'.$this->imagem))) {
@@ -63,25 +55,19 @@ class Produto extends Model
         return null;
     }
 
-    /**
-     * Formata o preço no padrão brasileiro para exibição nas views.
-     */
+    // Formata o preço no padrão brasileiro.
     public function getPrecoFormatadoAttribute(): string
     {
         return 'R$ '.number_format((float) $this->preco, 2, ',', '.');
     }
 
-    /**
-     * Nota simulada compartilhada pelos cartões enquanto as avaliações não são reais.
-     */
+    // Nota simulada compartilhada pelos cartões enquanto as avaliações não são reais.
     public function getNotaAttribute(): float
     {
         return (float) config('mock.rating.nota', 4.5);
     }
 
-    /**
-     * Quantidade simulada de avaliações exibida ao lado das estrelas.
-     */
+    // Quantidade simulada de avaliações exibida ao lado das estrelas.
     public function getTotalAvaliacoesAttribute(): int
     {
         return (int) config('mock.rating.total', 23);

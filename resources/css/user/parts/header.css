@@ -19,24 +19,24 @@
     }
 
     .logo-script {
-    display: inline-flex;
-    align-items: center;
-    flex: 0 0 auto;
-    gap: 6px;
-    color: var(--cor-texto);
-    font-family: var(--fonte-cursiva);
-    font-size: 1.7rem;
-    line-height: 1;
-    white-space: nowrap;
-    text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        flex: 0 0 auto;
+        gap: 6px;
+        color: var(--cor-texto);
+        font-family: var(--fonte-cursiva);
+        font-size: 1.7rem;
+        line-height: 1;
+        white-space: nowrap;
+        text-decoration: none;
     }
 
     .logo-costura {
-    display: block;
-    width: 55px;
-    height: 55px;
-    object-fit: contain;
-    flex-shrink: 0;
+        display: block;
+        width: 55px;
+        height: 55px;
+        object-fit: contain;
+        flex-shrink: 0;
     }
 
     .header-nav {

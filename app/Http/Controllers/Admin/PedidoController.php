@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Throwable;
 
 // Lista pedidos por dia e permite atualizar o status no painel.
 class PedidoController extends Controller
@@ -78,7 +79,7 @@ class PedidoController extends Controller
                 $data = Carbon::createFromFormat('Y-m-d', $dataInformada)->startOfDay();
 
                 return $data->format('Y-m-d') === $dataInformada ? $data : today();
-            } catch (\Throwable) {
+            } catch (Throwable) {
                 return today();
             }
         }

@@ -10,9 +10,7 @@ use Illuminate\View\View;
  */
 class SobreController extends Controller
 {
-    /**
-     * Renderiza a página institucional.
-     */
+    // Renderiza a página institucional.
     public function index(): View
     {
         return view('user.sobre');

@@ -19,6 +19,7 @@
 @import './user/views/product.css';
 @import './user/views/checkout.css';
 @import './user/views/profile.css';
+@import './user/views/orcamento.css';
 @import './admin/layout.css';
 @import './admin/components/chart.css';
 @import './admin/components/calendar.css';

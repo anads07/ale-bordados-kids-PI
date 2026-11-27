@@ -3,16 +3,8 @@
 return [
     'store' => [
         'name' => 'Alê Bordados Kids',
-        'tagline' => 'Bordados personalizados com carinho',
         'email' => 'loja@email.com',
         'whatsapp' => '(XX) XXXXX-XXXX',
-        'address' => 'Atendimento online para todo o Brasil',
-    ],
-
-    'social' => [
-        'facebook' => 'https://facebook.com',
-        'instagram' => 'https://instagram.com',
-        'tiktok' => 'https://tiktok.com',
     ],
 
     'payments' => [

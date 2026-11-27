@@ -11,13 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 /**
- * Controller de favoritos: lista as peças salvas e alterna o estado via sessão.
+ * Controller de favoritos persistidos na sessão.
  */
 class FavoriteController extends Controller
 {
-    /**
-     * Exibe os produtos favoritados pelo visitante.
-     */
+    // Exibe os produtos favoritados pelo visitante.
     public function index(FavoriteService $favoritos): View
     {
         return view('user.favoritos', [
@@ -25,9 +23,7 @@ class FavoriteController extends Controller
         ]);
     }
 
-    /**
-     * Alterna o favorito e responde em JSON ou por redirecionamento.
-     */
+    // Alterna o favorito e responde em JSON ou por redirecionamento.
     public function toggle(Request $request, Produto $produto, FavoriteService $favoritos): JsonResponse|RedirectResponse
     {
         $favoritado = $favoritos->toggle($produto);

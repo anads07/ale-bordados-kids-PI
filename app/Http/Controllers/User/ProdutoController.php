@@ -8,14 +8,11 @@ use App\Services\User\FavoriteService;
 use Illuminate\View\View;
 
 /**
- * Controller público da página de detalhes do produto e das opções de
- * personalização usadas antes de adicionar a peça ao carrinho.
+ * Controller público da página de detalhes do produto.
  */
 class ProdutoController extends Controller
 {
-    /**
-     * Exibe o produto, seus relacionados e o estado de favorito.
-     */
+    // Exibe o produto, seus relacionados e o estado de favorito.
     public function show(Produto $produto, FavoriteService $favoritos): View
     {
         $relacionados = Produto::query()

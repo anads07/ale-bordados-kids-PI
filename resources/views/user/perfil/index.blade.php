@@ -95,22 +95,7 @@
                                         </p>
 
                                         <ul class="profile-order__customization">
-                                            <li>Cor da peça: {{ $pedido->cor_produto ?: 'Não informada' }}</li>
-                                            @if ($pedido->escrita)
-                                                <li>Texto: {{ $pedido->escrita }}</li>
-                                            @endif
-                                            @if ($pedido->cor_escrita)
-                                                <li>Cor da linha: {{ $pedido->cor_escrita }}</li>
-                                            @endif
-                                            @if ($pedido->fonte_escrita)
-                                                <li>Fonte: {{ $pedido->fonte_escrita }}</li>
-                                            @endif
-                                            @if ($pedido->desenho)
-                                                <li>Desenho: {{ $pedido->desenho }}</li>
-                                            @endif
-                                            @if ($pedido->observacoes)
-                                                <li>Observações: {{ $pedido->observacoes }}</li>
-                                            @endif
+                                            <x-shared::product-customization :personalizacao="$pedido->personalizacao" />
                                         </ul>
 
                                         @if ($pedido->imagem_inspiracao_url)

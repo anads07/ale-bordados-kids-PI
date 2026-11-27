@@ -13,22 +13,18 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 /**
- * Controller de autenticação: exibe login e cadastro, valida credenciais,
- * cria usuários na tabela oficial e encerra a sessão com segurança.
+ * Controller de autenticação: login, cadastro e logout.
  */
 class AuthController extends Controller
 {
-    /**
-     * Exibe o login ou encaminha o usuário já autenticado.
-     */
+    // Exibe o login ou encaminha o usuário já autenticado.
     public function showLogin(): View|RedirectResponse
     {
         if (Auth::check()) {
             return $this->redirecionarUsuarioAutenticado(Auth::user());
         }
 
-        // Só avisa sobre o checkout quando a visita ao login veio do próprio
-        // checkout ou de uma tentativa de login que falhou.
+        // Avisa sobre o checkout apenas quando a visita veio do próprio checkout.
         $intencao = (string) session('url.intended');
         $finalizandoCompra = str_contains($intencao, '/checkout')
             && (url()->previous() === route('checkout.index') || session()->has('_old_input'));
@@ -38,10 +34,7 @@ class AuthController extends Controller
         ]);
     }
 
-    /**
-     * Tenta autenticar pelo e-mail e senha, regenera a sessão e encaminha
-     * administradores para /admin e clientes para a vitrine.
-     */
+    // Autentica, regenera a sessão e encaminha admin ou cliente.
     public function login(LoginRequest $request): RedirectResponse
     {
         $credenciais = $request->validated();
@@ -57,9 +50,7 @@ class AuthController extends Controller
         return $this->redirecionarUsuarioAutenticado($request->user());
     }
 
-    /**
-     * Exibe o cadastro ou encaminha o usuário já autenticado.
-     */
+    // Exibe o cadastro ou encaminha o usuário já autenticado.
     public function showRegister(): View|RedirectResponse
     {
         if (Auth::check()) {
@@ -69,10 +60,7 @@ class AuthController extends Controller
         return view('user.auth.register');
     }
 
-    /**
-     * Cria o usuário comum, autentica automaticamente e preserva a sessão
-     * de carrinho/favoritos que já existia antes do cadastro.
-     */
+    // Cria o usuário comum e preserva carrinho/favoritos da sessão.
     public function register(RegisterRequest $request): RedirectResponse
     {
         [$nome, $sobrenome] = $request->partesDoNome();
@@ -89,7 +77,7 @@ class AuthController extends Controller
         Auth::login($usuario);
         $request->session()->regenerate();
 
-        // Cadastro partiu do checkout: sinaliza para reabrir o modal de endereço.
+        // Cadastro partiu do checkout: sinaliza para reabrir o modal.
         if (str_contains((string) session('url.intended'), '/checkout')) {
             session()->flash('checkout_pos_login', true);
         }
@@ -97,9 +85,7 @@ class AuthController extends Controller
         return redirect()->intended(route('home'));
     }
 
-    /**
-     * Encerra a autenticação e invalida a sessão para evitar reutilização do token.
-     */
+    // Encerra a autenticação e invalida a sessão.
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
@@ -109,16 +95,14 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
-    // Centraliza o destino pós-login conforme o perfil do usuário e preserva
-    // o destino original quando o acesso partiu de uma rota protegida.
+    // Define o destino pós-login e preserva a rota protegida original.
     private function redirecionarUsuarioAutenticado(?Usuario $usuario): RedirectResponse
     {
-        $destinoPadrao = $usuario?->is_admin
+        $destinoPadrao = $usuario?->isAdminAutorizado()
             ? route('admin.dashboard')
             : route('home');
 
-        // Voltando ao checkout via login/cadastro, sinaliza para a página
-        // abrir sozinha o modal de endereço e pagamento.
+        // Voltando ao checkout, sinaliza para abrir o modal automaticamente.
         if (str_contains((string) session('url.intended'), '/checkout')) {
             session()->flash('checkout_pos_login', true);
         }

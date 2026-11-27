@@ -6,22 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
 
 /**
- * Valida o cadastro e garante que o nome completo caiba nas colunas
- * nome_usuario (20) e sobrenome_usuario (50) do schema oficial.
+ * Valida o cadastro e divide o nome entre as colunas do schema oficial.
  */
 class RegisterRequest extends FormRequest
 {
-    /**
-     * Autoriza o envio do formulário de cadastro.
-     */
+    // Autoriza o envio do formulário de cadastro.
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Remove espaços excedentes e padroniza o e-mail antes da validação.
-     */
+    // Remove espaços excedentes e padroniza o e-mail.
     protected function prepareForValidation(): void
     {
         $this->merge([
@@ -30,9 +25,7 @@ class RegisterRequest extends FormRequest
         ]);
     }
 
-    /**
-     * Define as regras de validação do cadastro.
-     */
+    // Define as regras de validação do cadastro.
     public function rules(): array
     {
         return [
@@ -42,9 +35,7 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    /**
-     * Confere se o nome possui ao menos duas partes e respeita os limites do banco.
-     */
+    // Confere se o nome tem duas partes e respeita os limites do banco.
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator) {
@@ -77,7 +68,9 @@ class RegisterRequest extends FormRequest
     }
 
     /**
-     * Divide o nome na primeira palavra e no restante para gravar nas duas colunas.
+     * Divide o nome na primeira palavra e no restante.
+     *
+     * @return array{0: string, 1: string}
      */
     public function partesDoNome(): array
     {
@@ -93,9 +86,7 @@ class RegisterRequest extends FormRequest
         ];
     }
 
-    /**
-     * Define mensagens de erro em português.
-     */
+    // Define mensagens de erro em português.
     public function messages(): array
     {
         return [

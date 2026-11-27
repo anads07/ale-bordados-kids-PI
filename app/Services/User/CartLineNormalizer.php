@@ -4,6 +4,23 @@ namespace App\Services\User;
 
 use App\Models\Produto;
 
+/**
+ * Normaliza e monta as linhas do carrinho guardadas na sessão.
+ *
+ * @phpstan-type LinhaCarrinho array{
+ *     produto_id: int,
+ *     quantidade: int,
+ *     cor_produto: string,
+ *     escrita: string|null,
+ *     cor_escrita: string|null,
+ *     fonte_escrita: string|null,
+ *     desenho: string|null,
+ *     observacoes: string|null,
+ *     imagem_inspiracao: string|null
+ * }
+ * @phpstan-type PersonalizacaoCarrinho array<string, mixed>
+ * @phpstan-type ConteudoCarrinho array<string, LinhaCarrinho>
+ */
 class CartLineNormalizer
 {
     /**
@@ -55,18 +72,7 @@ class CartLineNormalizer
      */
     public function montarLinha(Produto $produto, array $personalizacao, int $quantidade): array
     {
-        return [
-            'produto_id' => (int) $produto->id_pr,
-            'quantidade' => $quantidade,
-            'cor_produto' => $this->texto($personalizacao['cor_produto'] ?? null, 40)
-                ?: (string) config('mock.personalizacao.cor_padrao', 'Branco'),
-            'escrita' => $this->texto($personalizacao['escrita'] ?? null, 40),
-            'cor_escrita' => $this->texto($personalizacao['cor_escrita'] ?? null, 40),
-            'fonte_escrita' => $this->texto($personalizacao['fonte_escrita'] ?? null, 40),
-            'desenho' => $this->texto($personalizacao['desenho'] ?? null, 30),
-            'observacoes' => $this->texto($personalizacao['observacoes'] ?? null, 500),
-            'imagem_inspiracao' => $this->texto($personalizacao['imagem_inspiracao'] ?? null, 255),
-        ];
+        return $this->linha((int) $produto->id_pr, $quantidade, $personalizacao);
     }
 
     /**
@@ -82,17 +88,26 @@ class CartLineNormalizer
             return null;
         }
 
+        return $this->linha($idProduto, $quantidade, $linha);
+    }
+
+    /**
+     * @param  array<string, mixed>  $dados
+     * @return LinhaCarrinho
+     */
+    private function linha(int $idProduto, int $quantidade, array $dados): array
+    {
         return [
             'produto_id' => $idProduto,
             'quantidade' => $quantidade,
-            'cor_produto' => $this->texto($linha['cor_produto'] ?? null, 40)
+            'cor_produto' => $this->texto($dados['cor_produto'] ?? null, 40)
                 ?: (string) config('mock.personalizacao.cor_padrao', 'Branco'),
-            'escrita' => $this->texto($linha['escrita'] ?? null, 40),
-            'cor_escrita' => $this->texto($linha['cor_escrita'] ?? null, 40),
-            'fonte_escrita' => $this->texto($linha['fonte_escrita'] ?? null, 40),
-            'desenho' => $this->texto($linha['desenho'] ?? null, 30),
-            'observacoes' => $this->texto($linha['observacoes'] ?? null, 500),
-            'imagem_inspiracao' => $this->texto($linha['imagem_inspiracao'] ?? null, 255),
+            'escrita' => $this->texto($dados['escrita'] ?? null, 40),
+            'cor_escrita' => $this->texto($dados['cor_escrita'] ?? null, 40),
+            'fonte_escrita' => $this->texto($dados['fonte_escrita'] ?? null, 40),
+            'desenho' => $this->texto($dados['desenho'] ?? null, 30),
+            'observacoes' => $this->texto($dados['observacoes'] ?? null, 500),
+            'imagem_inspiracao' => $this->texto($dados['imagem_inspiracao'] ?? null, 255),
         ];
     }
 

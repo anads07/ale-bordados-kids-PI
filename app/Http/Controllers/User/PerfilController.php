@@ -8,14 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 /**
- * Controller da área do cliente: mostra os dados básicos da conta e o
- * histórico dos últimos pedidos feitos pelo usuário autenticado.
+ * Controller da área do cliente com dados da conta e histórico de pedidos.
  */
 class PerfilController extends Controller
 {
-    /**
-     * Carrega o resumo da conta e a lista paginada de pedidos.
-     */
+    // Carrega o resumo da conta e a lista paginada de pedidos.
     public function index(Request $request): View
     {
         $usuario = $request->user();

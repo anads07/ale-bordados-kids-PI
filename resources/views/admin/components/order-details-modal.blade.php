@@ -29,30 +29,11 @@
 
                 <h3>Personalização:</h3>
                 <dl class="admin-order-modal__customization">
-                    <div>
-                        <dt>Cor da peça:</dt>
-                        <dd>{{ $pedido->cor_produto ?: 'Não informada' }}</dd>
-                    </div>
-                    <div>
-                        <dt>Texto:</dt>
-                        <dd>{{ $pedido->escrita ?: 'Sem texto' }}</dd>
-                    </div>
-                    <div>
-                        <dt>Cor(es) da linha:</dt>
-                        <dd>{{ $pedido->cor_escrita ?: 'Não informada' }}</dd>
-                    </div>
-                    <div>
-                        <dt>Fonte:</dt>
-                        <dd>{{ $pedido->fonte_escrita ?: 'Não informada' }}</dd>
-                    </div>
-                    <div>
-                        <dt>Desenho:</dt>
-                        <dd>{{ $pedido->desenho ?: 'Não informado' }}</dd>
-                    </div>
-                    <div>
-                        <dt>Observações:</dt>
-                        <dd>{{ $pedido->observacoes ?: 'Nenhuma observação' }}</dd>
-                    </div>
+                    <x-shared::product-customization
+                        :personalizacao="$pedido->personalizacao"
+                        :mostrar-vazios="true"
+                        formato="definicao"
+                    />
                 </dl>
             </section>
 

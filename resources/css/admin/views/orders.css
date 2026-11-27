@@ -420,7 +420,7 @@
     }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1100px) {
     .admin-orders__layout {
         grid-template-columns: 320px minmax(0, 1fr);
     }
@@ -469,7 +469,7 @@
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 600px) {
     .admin-orders__heading {
         align-items: flex-start;
         flex-wrap: wrap;

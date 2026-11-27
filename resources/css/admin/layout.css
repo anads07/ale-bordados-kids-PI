@@ -24,8 +24,7 @@
 
     .admin-logo {
         font-size: 1.55rem;
-        /* A fonte script deixa um espaço visual à esquerda da primeira letra.
-           Esse ajuste compensa o recuo óptico e alinha a logo ao título/busca. */
+        /* Compensa o recuo óptico da fonte script e alinha a logo ao título. */
         transform: translateX(-8px);
     }
 
@@ -241,7 +240,7 @@
     }
 }
 
-@media (max-width: 1120px) {
+@media (max-width: 1100px) {
     .admin-header__inner {
         grid-template-columns: auto 1fr;
         padding-block: 14px;
